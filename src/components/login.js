@@ -1,23 +1,8 @@
-//Can have the login function in here, export it, and use it in the app.
-
-
-//To better understand the App, we can have the starting page as a signup page, once the user signs up, and if the user 
-// already has an account they can just use the login link and go from there. After logging in/signing up, the user will
-// be redirected to the homepage of the app, then, and only then can they post and view other posts by other users.
-
-//Things to consider:
-//   Protected Resources:Updating your own post (Only you can do that), delete your own post, (Only you can admin can do that)
-//   Non-protected resources: Getting all posts, getting all posts by ID (viewing someone else's profile) Getting your posts (Viewing your own profile)
-
-
-//MVP3: Adding customization to your own profile. That would be sick.
-
-
 import Axios from 'axios';
 import React, {useState} from 'react';
 import swal from 'sweetalert';
 
-function LogIn() {
+function Login() {
 
      const [username, setUsername] = useState('');
      const [password, setPassword] = useState('');
@@ -51,4 +36,4 @@ function LogIn() {
      )
 }
 
-export default LogIn;
+export default Login;
