@@ -1,32 +1,23 @@
 import "./styles/App.css"
 import React from 'react';
 import SignUp from './components/signup';
+import LogIn from './components/login';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import Home from "./components/home";
+
 function App() {
-
-    //  const getUsers = () => {
-    //       Axios.get("http://localhost:3001/api/users/").then((response) => {
-    //         setUserList(response.data);
-    //       });
-    //     };
-
-    //     const deleteUser = (id) => {
-    //       Axios.delete(`http://localhost:3001/api/users/${id}`).then((response) => {
-    //         setUserList(
-    //           userList.filter((val) => {
-    //             return val.id !== id;
-    //           })
-    //         );
-    //       });
-    //     };
 
         return (
           <Router>
+            <div className="App">
             <Routes>
-              <Route exact path="/" element={<SignUp />} />
+              <Route path="/" element={<SignUp />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/login" element={<LogIn />} />
             </Routes>
+            </div>
           </Router>
-
+          
      );
 }
 

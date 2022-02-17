@@ -119,16 +119,16 @@ module.exports = {
   login: (req,res) => {
     const body = req.body;
     getUserByUsername(body.username, (err,results) => {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      if (!results) {
-        return res.json ({
-          success: 0,
-          data: 'Invalid username or password'
-        });
-      }
+      // if (err) {
+      //   console.log(err);
+      //   return;
+      // }
+      // if (!results) {
+      //   return res.json ({
+      //     success: 0,
+      //     data: 'Invalid username or password'
+      //   });
+      // }
       const result = compareSync(body.password,results.password);
       if(result){
         results.password = undefined;

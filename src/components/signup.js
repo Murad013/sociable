@@ -1,8 +1,7 @@
-// import this function into App.js once you figure how to get rid of that component error. Just to make the App look more organized and presentable.
 import Axios from 'axios';
 import React, {useState} from 'react';
 import swal from 'sweetalert';
-
+import { Link } from 'react-router-dom'
 function SignUp() {
 
      const [firstName, setFirstName] = useState('');
@@ -19,11 +18,11 @@ function SignUp() {
             password: password,
             gender: gender
           }).then(() => {
-            swal(`HEY ${firstName}`,"Welcome To Sociable!", "success");
+            swal(`Hey ${firstName}!`,"Welcome To Sociable!", "success");
           }).then(() => {
       
           }).catch(() => {
-            swal("Oops!", "Username Already Taken...", "error");
+            swal(`Sorry ${firstName}`, "Username's Already Taken...", "error");
           });
         };
 
@@ -50,7 +49,8 @@ function SignUp() {
             <input type = "text" name = "gender" onChange ={(e) => {
               setGender(e.target.value);
             }}/>
-            <button onClick={signup}>Sign Up!</button>
+            <Link to={"/home"}><button onClick={signup}>Sign Up!</button></Link>
+            <Link to={"/login"}>Log In!</Link>
 
         </div>
      )
