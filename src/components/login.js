@@ -1,5 +1,6 @@
 import Axios from 'axios';
 import React, {useState} from 'react';
+import { Link } from 'react-router-dom'
 import swal from 'sweetalert';
 
 function Login() {
@@ -32,6 +33,8 @@ function Login() {
               setPassword(e.target.value);
             }}/>
             <button onClick={login}>Log In!</button>
+            <Link to={"/signup"}>Go back to sign up</Link>
+
         </div>
      )
 }
