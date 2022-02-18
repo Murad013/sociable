@@ -1,9 +1,12 @@
 import Axios from 'axios';
 import React, {useState} from 'react';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom'
-function SignUp() {
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
+function SignUp() {
+  
+     const navigate = useNavigate();
      const [firstName, setFirstName] = useState('');
      const [lastName, setLastName] = useState('');
      const [username, setUsername] = useState('');
@@ -19,8 +22,7 @@ function SignUp() {
             gender: gender
           }).then(() => {
             swal(`Hey ${firstName}!`,"Welcome To Sociable!", "success");
-          }).then(() => {
-      
+            navigate('/home', { replace: true })
           }).catch(() => {
             swal(`Sorry ${firstName}`, "Username's Already Taken...", "error");
           });
@@ -49,7 +51,7 @@ function SignUp() {
             <input type = "text" name = "gender" onChange ={(e) => {
               setGender(e.target.value);
             }}/>
-            <Link to={"/home"}><button onClick={signup}>Sign Up!</button></Link>
+            <button onClick={signup}>Sign Up</button>
             <Link to={"/login"}>Log In!</Link>
 
         </div>

@@ -129,6 +129,8 @@ module.exports = {
       //     data: 'Invalid username or password'
       //   });
       // }
+      // Use simpler logic and comment this JWT logic out of it
+      
       const result = compareSync(body.password,results.password);
       if(result){
         results.password = undefined;

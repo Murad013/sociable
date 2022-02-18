@@ -33,7 +33,7 @@ function Login() {
               setPassword(e.target.value);
             }}/>
             <button onClick={login}>Log In!</button>
-            <Link to={"/signup"}>Go back to sign up</Link>
+            <Link to={"/"}>Go back to sign up</Link>
 
         </div>
      )
