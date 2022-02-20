@@ -1,6 +1,6 @@
 //This file just includes the routes for each of the endpoints
 
-const {createUser,getUserByUserId,getUsers,updateUser,deleteUser,login} = require('../controllers/user-controllers');
+const {createUser,login,getUserByUserId,getUsers,updateUser,deleteUser} = require('../controllers/user-controllers');
 const router = require('express').Router();
 //const {canDeleteUser,canEditUser} = require('../permissions/user-permissions')
 const {checkToken} = require('../auth/token-validation');

@@ -32,6 +32,37 @@ module.exports = {
       });
     });
   },
+  login: (req, res) => {
+    const body = req.body;
+    getUserByUsername(body.username, (err, results) => {
+      if (err) {
+        console.log(err);
+      }
+      if (!results) {
+        return res.json({
+          success: 0,
+          data: "Username doesn't exist."
+        });
+      }
+      const result = compareSync(body.password, results.password);
+      if (result) {
+        results.password = undefined;
+        const jsontoken = sign({result: results}, process.env.KEY, {
+          expiresIn: "1h"
+        });
+        return res.json({
+          success: 1,
+          message: "Login Successfully!",
+          token: jsontoken
+        });
+      } else {
+        return res.json({
+          success: 0,
+          data: "Invalid username or password..."
+        });
+      }
+    });
+  },
   getUserByUserId: (req,res) => {
     const id = req.params.id;
     getUserByUserId(id, (err, results) => {
@@ -115,40 +146,5 @@ module.exports = {
         });
       }
       });
-    },
-  login: (req,res) => {
-    const body = req.body;
-    getUserByUsername(body.username, (err,results) => {
-      // if (err) {
-      //   console.log(err);
-      //   return;
-      // }
-      // if (!results) {
-      //   return res.json ({
-      //     success: 0,
-      //     data: 'Invalid username or password'
-      //   });
-      // }
-      // Use simpler logic and comment this JWT logic out of it
-      
-      const result = compareSync(body.password,results.password);
-      if(result){
-        results.password = undefined;
-        const jsontoken = sign({result:results},process.env.KEY, {
-          expiresIn: '1hr'
-        });
-        return res.json({
-          success: 1,
-          message: 'Login successfully',
-          token: jsontoken
-        });
-      } else {
-        return res.json({
-          success: 0,
-          message: 'Invalid email or password'
-        });
-      }
-
-    });
-  }
+    }
 };

@@ -1,11 +1,9 @@
-
 import React from 'react';
 
 function Home() {
      return (
           <div className='Home'>
-          Welcome!
-          
+          <h1>Welcome!</h1>
           </div>
      )
 }

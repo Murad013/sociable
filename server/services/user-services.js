@@ -1,7 +1,7 @@
 const pool = require('../config/database'); //connection to database
 
 module.exports = {
-     createUser: (data, callBack) => {
+    createUser: (data, callBack) => {
        pool.query(
          `insert into registration(firstName,lastName,username,password,gender)
                  values(?,?,?,?,?)`,
@@ -20,7 +20,19 @@ module.exports = {
            }
        );
      },
-     getUsers: callBack => {
+    getUserByUsername: (username, callBack) => {
+      pool.query(
+        `select * from registration where username = ?`,
+        [username],
+        (error,results) => {
+          if(error){
+            callBack(error);
+          }
+          return callBack(null,results[0]);
+        }
+      );
+    },
+    getUsers: callBack => {
        pool.query(
          `select id,firstName,lastName,username,password,gender from registration`,
          [],
@@ -32,7 +44,7 @@ module.exports = {
            }
        );
      },
-     getUserByUserId: (id,callBack) => {
+    getUserByUserId: (id,callBack) => {
        pool.query(
          `select * from registration where id = ?`,
          [id],
@@ -44,7 +56,7 @@ module.exports = {
            }
        );
      },
-     updateUser: (data,callBack) => {
+    updateUser: (data,callBack) => {
    
          pool.query(
            //data parameter
@@ -65,7 +77,7 @@ module.exports = {
              }
          );
      },
-     deleteUser: (id, callBack) => {
+    deleteUser: (id, callBack) => {
        pool.query(
          `delete from registration where id = ?`,
          [id],
@@ -75,18 +87,6 @@ module.exports = {
              return callBack(error); //if error
            }
            return callBack(null, results[0]); //if no error
-         }
-       );
-     },
-     getUserByUsername: (username, callBack) => {
-       pool.query(
-         `select * from registration where username = ?`,
-         [username],
-         (error,results) => {
-           if(error){
-             return callBack(error);
-           }
-           return callBack(null,results[0]);
          }
        );
      }
