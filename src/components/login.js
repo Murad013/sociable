@@ -1,40 +1,39 @@
 import Axios from 'axios';
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom'
+//import {Form} from 'antd;'
 import swal from 'sweetalert';
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
-
+     const navigate = useNavigate();
      const [username, setUsername] = useState('');
      const [password, setPassword] = useState('');
+
 
      const login = () => {
           Axios.post('http://localhost:3001/api/users/login', {
             username: username,
             password: password
           }).then(() => {
-            swal(`HEY ${username}`,"Welcome To Sociable!", "success");
-          }).then(() => {
-      
+            swal(`Hey ${username}!`,"Welcome To Sociable!", "success");
+            navigate('/home', { replace: true })
           }).catch(() => {
-            swal("Oops!", "Invalid Username or Password", "error");
+            swal(`Sorry ${username}`, "Invalid Username or password", "error");
           });
         };
 
         return (
           <div className = "loginForm">
             <h1>Login to Sociable!</h1>
-            <label>Username:</label>
-            <input type = "text" name = "firstName" onChange ={(e) => {
+            <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
               setUsername(e.target.value);
             }}/>
-            <label>Password:</label>
-            <input type = "text" name = "lastName" onChange ={(e) => {
+            <input type = "text" placeholder='Password' name = "password" onChange ={(e) => {
               setPassword(e.target.value);
             }}/>
             <button onClick={login}>Log In!</button>
-            <Link to={"/"}>Go back to sign up</Link>
-
+            <Link to={"/"}>Go back to sign up.</Link>
         </div>
      )
 }

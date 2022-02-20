@@ -8,6 +8,7 @@ const userRouter = require('../server/routes/user-routes');
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/api/users", userRouter);

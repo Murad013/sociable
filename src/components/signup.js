@@ -31,24 +31,19 @@ function SignUp() {
         return (
           <div className = "signUpForm">
             <h1>Sign Up To Sociable!</h1>
-            <label>First Name:</label>
-            <input type = "text" name = "firstName" onChange ={(e) => {
+            <input type = "text" placeholder='First Name' name = "firstName" onChange ={(e) => {
               setFirstName(e.target.value);
             }}/>
-            <label>Last Name:</label>
-            <input type = "text" name = "lastName" onChange ={(e) => {
+            <input type = "text" placeholder='Last Name' name = "lastName" onChange ={(e) => {
               setLastName(e.target.value);
             }}/>
-            <label>Username:</label>
-            <input type = "text" name = "username" onChange ={(e) => {
+            <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
               setUsername(e.target.value);
             }}/>
-            <label>Password:</label>
-            <input type = "text" name = "password" onChange ={(e) => {
+            <input type = "text" placeholder='Password' name = "password" onChange ={(e) => {
               setPassword(e.target.value);
             }}/>
-            <label>Gender:</label>
-            <input type = "text" name = "gender" onChange ={(e) => {
+            <input type = "text" placeholder='Gender' name = "gender" onChange ={(e) => {
               setGender(e.target.value);
             }}/>
             <button onClick={signup}>Sign Up</button>
