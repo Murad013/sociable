@@ -52,13 +52,13 @@ module.exports = {
           expiresIn: "1h"
         });
 
-        return res.json({
+        return res.status(200).json({
           success: 1,
           message: "Login Successfully!",
           token: jsontoken
         });
       } else {
-        return res.json({
+        return res.status(500).json({
           success: 0,
           data: "Invalid username or password..."
         });
