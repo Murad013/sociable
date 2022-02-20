@@ -38,7 +38,7 @@ module.exports = {
          [],
          (error,results) => {
            if(error){
-             return callBack(error);
+            callBack(error);
            }
            return callBack(null,results);
            }
@@ -86,7 +86,7 @@ module.exports = {
            if (error) {
              return callBack(error); //if error
            }
-           return callBack(null, results[0]); //if no error
+           return callBack(null, results); //if no error
          }
        );
      }

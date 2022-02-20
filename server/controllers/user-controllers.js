@@ -38,8 +38,9 @@ module.exports = {
       if (err) {
         console.log(err);
       }
+
       if (!results) {
-        return res.json({
+        return res.status(500).json({
           success: 0,
           data: "Username doesn't exist."
         });
@@ -50,6 +51,7 @@ module.exports = {
         const jsontoken = sign({result: results}, process.env.KEY, {
           expiresIn: "1h"
         });
+
         return res.json({
           success: 1,
           message: "Login Successfully!",
@@ -86,19 +88,13 @@ module.exports = {
     });
   },
   getUsers: (req,res) => {
-    getUsers((err,results) => {
-      if (err){
+    getUsers((err, results) => {
+      if (err) {
         console.log(err);
         return;
       }
-      if(!results) {
-        return res.json({
-          success: 0,
-          message: 'No records were found'
-        });
-      }
-      return res.json({
-        success:1,
+      return res.status(200).json({
+        success: 1,
         data: results
       });
     });
@@ -132,15 +128,15 @@ module.exports = {
           return;
         }
         //If no records were found
-        if(!results) {
-          return res.json({
+        if(results.affectedRows === 0) {
+          return res.status(500).json({
             success: 0,
             message: 'No record was found with that ID'
           });
         }
         //If success
         if (results){
-        return res.json({
+        return res.status(200).json({
           success: 1,
           message: "User deleted successfully"
         });
