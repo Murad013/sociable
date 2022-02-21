@@ -6,26 +6,20 @@ const {sign} = require('jsonwebtoken');
 
 // a module is a collection of javascript functions and objects that can be used by external applications
 module.exports = {
-  createUser: (req,res) => {
-    const body = req.body; //Whatever the user passes will be saved inside this body
-
-    //Encrypting password before storing in database
-    //Cannot store password in plain text so will be storing password into cyber text so it cannot be readable.
-    const salt = genSaltSync(10); 
-    body.password = hashSync(body.password, salt) //the hash generated password is stored inside body.password
-
-    //calling the create service which will query the body of this request into the database
+  createUser: (req, res) => {
+    const body = req.body;
+    const salt = genSaltSync(10);
+    body.password = hashSync(body.password, salt);
     createUser(body, (err, results) => {
-      //If error is passed
-      if (err){
-        console.log(err);
+      if (err) {
+        return;
+      }
+      if (!results) {
         return res.status(500).json({
           success: 0,
           message: "Database Connection Error"
         });
       }
-
-      // If success, the results parameter will be passed to callBack
       return res.status(200).json({
         success: 1,
         data: results
@@ -75,13 +69,13 @@ module.exports = {
       }
       //If no records were found
       if(!results) {
-        return res.json({
+        return res.status(500).json({
           success: 0,
           message: 'No record was found with that ID'
         });
       }
       //If success, return user information
-      return res.json({
+      return res.status(200).json({
         success: 1,
         data: results
       });
@@ -92,6 +86,12 @@ module.exports = {
       if (err) {
         console.log(err);
         return;
+      }
+      if(!results){
+        return res.status(500).json({
+          success: 0,
+          message: "No users found"
+        });
       }
       return res.status(200).json({
         success: 1,

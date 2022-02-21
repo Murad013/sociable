@@ -14,7 +14,7 @@ module.exports = {
            ],
            (error,results) => {
              if (error) {
-               return callBack(error); //if error
+               callBack(error); //if error
              }
              return callBack(null, results); //if no error
            }
@@ -34,7 +34,7 @@ module.exports = {
     },
     getUsers: callBack => {
        pool.query(
-         `select id,firstName,lastName,username,password,gender from registration`,
+         `select * from registration`,
          [],
          (error,results) => {
            if(error){
