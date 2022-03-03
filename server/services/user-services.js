@@ -3,14 +3,16 @@ const pool = require('../config/database'); //connection to database
 module.exports = {
     createUser: (data, callBack) => {
        pool.query(
-         `insert into registration(firstName,lastName,username,password,gender)
-                 values(?,?,?,?,?)`,
+         `insert into user(firstname,lastname,display_name,email,password,gender,age)
+                 values(?,?,?,?,?,?,?)`,
            [
-             data.firstName,
-             data.lastName,
-             data.username,
+             data.firstname,
+             data.lastname,
+             data.display_name,
+             data.email,
              data.password,
-             data.gender
+             data.gender,
+             data.age
            ],
            (error,results) => {
              if (error) {
@@ -20,10 +22,14 @@ module.exports = {
            }
        );
      },
-    getUserByUsername: (username, callBack) => {
+     //Login service
+    getUserByUsername: (display_name, callBack) => {
       pool.query(
-        `select * from registration where username = ?`,
-        [username],
+        `select * 
+         from user 
+         where display_name = ?
+         `,
+        [display_name],
         (error,results) => {
           if(error){
             callBack(error);
@@ -34,7 +40,7 @@ module.exports = {
     },
     getUsers: callBack => {
        pool.query(
-         `select * from registration`,
+         `select * from user`,
          [],
          (error,results) => {
            if(error){
@@ -44,10 +50,10 @@ module.exports = {
            }
        );
      },
-    getUserByUserId: (id,callBack) => {
+    getUserByUserId: (suid,callBack) => {
        pool.query(
-         `select * from registration where id = ?`,
-         [id],
+         `select * from user where suid = ?`,
+         [suid],
          (error,results) => {
            if(error){
              return callBack(error);
@@ -60,13 +66,14 @@ module.exports = {
    
          pool.query(
            //data parameter
-           `update registration set firstName =?, lastName =?, username =?, password =? where id=?`,
+           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ? where SUID = ?`,
              [
-               data.firstName,
-               data.lastName,
-               data.username,
+               data.firstname,
+               data.lastname,
+               data.display_name,
+               data.email,
                data.password,
-               data.id
+               data.suid
              ],
              (error,results) => {
                // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
@@ -77,10 +84,10 @@ module.exports = {
              }
          );
      },
-    deleteUser: (id, callBack) => {
+    deleteUser: (suid, callBack) => {
        pool.query(
-         `delete from registration where id = ?`,
-         [id],
+         `delete from user where suid = ?`,
+         [suid],
          (error,results) => {
            // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
            if (error) {

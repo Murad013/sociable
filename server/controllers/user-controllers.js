@@ -28,7 +28,7 @@ module.exports = {
   },
   login: (req, res) => {
     const body = req.body;
-    getUserByUsername(body.username, (err, results) => {
+    getUserByUsername(body.display_name, (err, results) => {
       if (err) {
         console.log(err);
       }
@@ -60,7 +60,7 @@ module.exports = {
     });
   },
   getUserByUserId: (req,res) => {
-    const id = req.params.id;
+    const id = req.params.suid;
     getUserByUserId(id, (err, results) => {
       //If there is an error, console.log that error and return nothing
       if(err) {
@@ -120,7 +120,7 @@ module.exports = {
     });
   },
   deleteUser: (req, res) => {
-      const id = req.params.id;
+      const id = req.params.suid;
       deleteUser(id, (err, results) => {
         //If there is an error, console.log that error and return nothing
         if(err) {
