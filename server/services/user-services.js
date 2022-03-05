@@ -2,9 +2,10 @@ const pool = require('../config/database'); //connection to database
 
 module.exports = {
     createUser: (data, callBack) => {
+      console.log(data);
        pool.query(
-         `insert into user(firstname,lastname,display_name,email,password,gender,age)
-                 values(?,?,?,?,?,?,?)`,
+         `INSERT INTO user (firstname,lastname,display_name,email,password,gender,age)
+                VALUES(?,?,?,?,?,?,?)`,
            [
              data.firstname,
              data.lastname,
@@ -25,10 +26,7 @@ module.exports = {
      //Login service
     getUserByUsername: (display_name, callBack) => {
       pool.query(
-        `select * 
-         from user 
-         where display_name = ?
-         `,
+        `SELECT * FROM user WHERE display_name = ?`,
         [display_name],
         (error,results) => {
           if(error){
@@ -66,13 +64,15 @@ module.exports = {
    
          pool.query(
            //data parameter
-           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ? where SUID = ?`,
+           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ?, gender = ?, age = ? where SUID = ?`,
              [
                data.firstname,
                data.lastname,
                data.display_name,
                data.email,
                data.password,
+               data.gender,
+               data.age,
                data.suid
              ],
              (error,results) => {
