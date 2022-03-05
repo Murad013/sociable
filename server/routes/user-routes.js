@@ -6,10 +6,10 @@ const router = require('express').Router();
 const {checkToken} = require('../auth/token-validation');
 
 router.post('/signup', createUser); //Signup Public
-router.get('/:id', getUserByUserId); //Public
+router.get('/:suid', getUserByUserId); //Public
 router.get('/', getUsers); //Public
 router.patch('/', checkToken, updateUser); //Protected
-router.delete('/:id', checkToken, deleteUser); //Protected
+router.delete('/:suid', deleteUser); //Protected
 router.post('/login',login); //Public
 
 module.exports = router;
