@@ -14,7 +14,6 @@ module.exports = {
       if (err) {
         return;
       }
-      console.log(results)
       if (!results) {
         return res.status(500).json({
           success: 0,
