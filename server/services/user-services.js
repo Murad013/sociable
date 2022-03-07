@@ -2,7 +2,6 @@ const pool = require('../config/database'); //connection to database
 
 module.exports = {
     createUser: (data, callBack) => {
-      console.log(data);
        pool.query(
          `INSERT INTO user (firstname,lastname,display_name,email,password,gender,age)
                 VALUES(?,?,?,?,?,?,?)`,
