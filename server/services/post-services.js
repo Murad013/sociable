@@ -2,18 +2,11 @@ const pool = require('../config/database'); //connection to database
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
-    createUser: (data, callBack) => {
+    createPost: (data, callBack) => {
        pool.query(
-         `INSERT INTO user (firstname,lastname,display_name,email,password,gender,age)
-                VALUES(?,?,?,?,?,?,?)`,
+         `insert into posts (body) values(?)`,
            [
-             data.firstname,
-             data.lastname,
-             data.display_name,
-             data.email,
-             data.password,
-             data.gender,
-             data.age
+             data.body
            ],
            (error,results) => {
              if (error) {
@@ -23,22 +16,10 @@ module.exports = {
            }
        );
      },
-     //Login service
-    getUserByUsername: (display_name, callBack) => {
-      pool.query(
-        `SELECT * FROM user WHERE display_name = ?`,
-        [display_name],
-        (error,results) => {
-          if(error){
-            callBack(error);
-          }
-          return callBack(null,results[0]);
-        }
-      );
-    },
-    getUsers: callBack => {
+     //Homepage
+    getPosts: callBack => {
        pool.query(
-         `select * from user`,
+         `select * from posts`,
          [],
          (error,results) => {
            if(error){
@@ -48,9 +29,10 @@ module.exports = {
            }
        );
      },
-    getUserByUserId: (suid,callBack) => {
+     //Profile Page
+    getPostsByUserId: (suid,callBack) => {
        pool.query(
-         `select * from user where suid = ?`,
+         `select * from posts where suid = ?`,
          [suid],
          (error,results) => {
            if(error){
@@ -60,20 +42,15 @@ module.exports = {
            }
        );
      },
-    updateUser: (data,callBack) => {
+    updatePost: (data,callBack) => {
    
          pool.query(
            //data parameter
-           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ?, gender = ?, age = ? where SUID = ?`,
+           `update posts set body = ? where SUID = ? and PID = ?`,
              [
-               data.firstname,
-               data.lastname,
-               data.display_name,
-               data.email,
-               data.password,
-               data.gender,
-               data.age,
-               data.suid
+               data.body,
+               data.suid,
+               data.pid
              ],
              (error,results) => {
                // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
@@ -84,10 +61,10 @@ module.exports = {
              }
          );
      },
-    deleteUser: (suid, callBack) => {
+    deletePost: (pid, callBack) => {
        pool.query(
-         `delete from user where suid = ?`,
-         [suid],
+         `delete from posts where pid = ?`,
+         [pid],
          (error,results) => {
            // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
            if (error) {
