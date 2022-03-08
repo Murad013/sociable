@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const userRouter = require('../server/routes/user-routes');
+const postRouter = require('../server/routes/post-routes');
 //const postRouter = require('../server/routes/post-routes');
 
 app.use(cors());
@@ -12,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/api/users", userRouter);
+app.use("api/posts", postRouter);
 //app.use("api/posts", postRouter);
 const port = process.env.SERVER_PORT;
 app.listen(port, () => {

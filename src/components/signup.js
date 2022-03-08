@@ -26,7 +26,7 @@ function SignUp() {
             age: age
           }).then(() => {
             swal(`Hey ${firstname}!`,"Welcome To Sociable!", "success");
-            navigate('/home', { replace: true })
+            navigate('/home', { replace: true });
           }).catch(() => {
             swal(`Sorry ${firstname}`, "Username's Already Taken...", "error");
           });
