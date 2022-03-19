@@ -2,10 +2,11 @@ const pool = require('../config/database'); //connection to database
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
+  
     createUser: (data, callBack) => {
-       pool.query(
-         `INSERT INTO user (firstname,lastname,display_name,email,password,gender,age)
-                VALUES(?,?,?,?,?,?,?)`,
+      const query = `INSERT INTO user (firstname,lastname,display_name,email,password,gender,age)
+                     VALUES(?,?,?,?,?,?,?);`
+       pool.query(query,
            [
              data.firstname,
              data.lastname,

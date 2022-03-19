@@ -1,11 +1,11 @@
 const {createPost, getPosts, getPostsByUserId, updatePost, deletePost} = require('../services/post-services');
 module.exports = {
   createPost: (req, res) => {
-    const body = req.body;
-    createPost(body, (err, results) => {
+    createPost(req.body, (err, results) => {
       if (err) {
         return;
       }
+      console.log(results);
       if (!results) {
         return res.status(500).json({
           success: 0,

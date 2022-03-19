@@ -4,10 +4,8 @@ module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
     createPost: (data, callBack) => {
        pool.query(
-         `insert into posts (body) values(?)`,
-           [
-             data.body
-           ],
+         `insert into posts (suid,body) value (?,?)`,
+           [data.suid, data.body],
            (error,results) => {
              if (error) {
                callBack(error); //if error

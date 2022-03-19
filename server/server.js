@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/api/users", userRouter);
-app.use("api/posts", postRouter);
-//app.use("api/posts", postRouter);
+app.use("/api/posts", postRouter);
+
 const port = process.env.SERVER_PORT;
 app.listen(port, () => {
      console.log(`Listening on port: ${port}`);
