@@ -2,7 +2,7 @@
 // This is definitely a start though
 
 const pool = require('../config/database'); //connection to database
-const {login} = require('../controllers/user-controllers');
+//const {login} = require('../controllers/user-controllers');
 const jwtDecode = require('jwt-decode');
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6MzIsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZGlzcGxheV9uYW1lIjoiTXVyZGE5NyIsImVtYWlsIjoibUBnbWFpbC5jb20iLCJnZW5kZXIiOiJNYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0NzkxNjk4NCwiZXhwIjoxNjQ4MDAzMzg0fQ.QsjeyzsqjWGCwVLCp_fHF0X0GBo6HhEaZF-gXnPdZbo'
 const decoded = jwtDecode(token);
