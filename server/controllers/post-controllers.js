@@ -30,7 +30,7 @@ module.exports = {
       if(!results) {
         return res.status(500).json({
           success: 0,
-          message: 'No record was found with that ID'
+          message: 'No posts were found from that user ID'
         });
       }
       //If success, return user information
@@ -49,7 +49,7 @@ module.exports = {
       if(!results){
         return res.status(500).json({
           success: 0,
-          message: "No users found"
+          message: "No posts found"
         });
       }
       return res.status(200).json({
@@ -67,7 +67,7 @@ module.exports = {
       if(!results){
         return res.json({
           success: 0,
-          message: 'This username is taken'
+          message: 'Failed to update'
         });
       }
       return res.json({
@@ -88,14 +88,14 @@ module.exports = {
         if(results.affectedRows === 0) {
           return res.status(500).json({
             success: 0,
-            message: 'No record was found with that ID'
+            message: 'No post was found with that ID'
           });
         }
         //If success
         if (results){
         return res.status(200).json({
           success: 1,
-          message: "User deleted successfully"
+          message: "Post deleted successfully"
         });
       }
       });

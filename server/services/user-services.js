@@ -65,7 +65,7 @@ module.exports = {
    
          pool.query(
            //data parameter
-           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ?, gender = ?, age = ? where SUID = ?`,
+           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ?, gender = ?, age = ? where suid = ?`,
              [
                data.firstname,
                data.lastname,
