@@ -17,7 +17,12 @@ function Home() {
           });
         }
      return (
-          <div className='Home'>
+          <div className='Home' style={{
+               display: 'flex',
+               justifyContent: 'center',
+               alignItems: 'center',
+               height: '90vh'
+             }}>
                <h1>Welcome!</h1>
                <Link to={"/login"}><button>Logout!</button></Link>
                <div className='postForm'>
