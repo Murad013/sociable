@@ -1,7 +1,10 @@
+// Need to figure out how to organically insert the JWT in here and decode it without having to actually go and get it from postman and insert it in here. 
+// This is definitely a start though
+
 const pool = require('../config/database'); //connection to database
 const {login} = require('../controllers/user-controllers');
 const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NywiZmlyc3RuYW1lIjoiTXVyYWQiLCJsYXN0bmFtZSI6IlNhbGFtZWgiLCJkaXNwbGF5X25hbWUiOiJ6YWlkIiwiZW1haWwiOiJ6YWlkQGdtYWlsLmNvbSIsImdlbmRlciI6Im1hbGUiLCJhZ2UiOjI1fSwiaWF0IjoxNjQ3OTA5NzQ1LCJleHAiOjE2NDc5MTMzNDV9.ygp8HK8tmbL0HKFGSkNmLbLCq8EoV9jq21GnUuQVnqg';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6MzIsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZGlzcGxheV9uYW1lIjoiTXVyZGE5NyIsImVtYWlsIjoibUBnbWFpbC5jb20iLCJnZW5kZXIiOiJNYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0NzkxNjk4NCwiZXhwIjoxNjQ4MDAzMzg0fQ.QsjeyzsqjWGCwVLCp_fHF0X0GBo6HhEaZF-gXnPdZbo'
 const decoded = jwtDecode(token);
 
 module.exports = {
