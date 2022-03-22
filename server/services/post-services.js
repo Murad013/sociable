@@ -40,7 +40,7 @@ module.exports = {
            if(error){
              return callBack(error);
            }
-           return callBack(null,results[0]);  //result is returned in an array format so we must receive the first index only because we only want one user at a time
+           return callBack(null,results);  //result is returned in an array format so we must receive the first index only because we only want one user at a time
            }
        );
      },
