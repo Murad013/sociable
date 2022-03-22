@@ -4,7 +4,7 @@ const {createPost,getPostsByUserID,getPosts,updatePost,deletePost} = require('..
 const router = require('express').Router();
 const {checkToken} = require('../auth/token-validation');
 
-router.post('/post', checkToken, createPost); //Signup Public
+router.post('/post', createPost); //Signup Public
 router.get('/:suid', checkToken, getPostsByUserID); //Public
 router.get('/', checkToken, getPosts); //Public
 router.patch('/', checkToken, updatePost); //Protected
