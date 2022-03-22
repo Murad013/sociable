@@ -1,11 +1,11 @@
-const {createPost, getPosts, getPostsByUserId, updatePost, deletePost} = require('../services/post-services');
+const {createPost, getPosts, getPostsByUserID, updatePost, deletePost} = require('../services/post-services');
 module.exports = {
   createPost: (req, res) => {
     createPost(req.body, (err, results) => {
       if (err) {
+        console.log(err)
         return;
       }
-      console.log(results);
       if (!results) {
         return res.status(500).json({
           success: 0,
@@ -18,9 +18,9 @@ module.exports = {
       });
     });
   },
-  getPostsByUserId: (req,res) => {
+  getPostsByUserID: (req,res) => {
     const id = req.params.suid;
-    getPostsByUserId(id, (err, results) => {
+    getPostsByUserID(id, (err, results) => {
       //If there is an error, console.log that error and return nothing
       if(err) {
         console.log(err);
