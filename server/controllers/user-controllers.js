@@ -43,7 +43,7 @@ module.exports = {
       if (result) {
         results.password = undefined;
         const jsontoken = sign({result: results}, process.env.KEY, {
-          expiresIn: "1h"
+          expiresIn: "24h"
         });
 
         return res.status(200).json({
@@ -64,7 +64,6 @@ module.exports = {
     getUserByUserId(id, (err, results) => {
       //If there is an error, console.log that error and return nothing
       if(err) {
-        console.log(err);
         return;
       }
       //If no records were found

@@ -3,8 +3,8 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
-const userRouter = require('../server/routes/user-routes');
-const postRouter = require('../server/routes/post-routes');
+const userRouter = require('./routes/user-routes');
+const postRouter = require('./routes/post-routes');
 //const postRouter = require('../server/routes/post-routes');
 
 app.use(cors());

@@ -1,11 +1,15 @@
 const pool = require('../config/database'); //connection to database
+const {login} = require('../controllers/user-controllers');
+const jwtDecode = require('jwt-decode');
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NywiZmlyc3RuYW1lIjoiTXVyYWQiLCJsYXN0bmFtZSI6IlNhbGFtZWgiLCJkaXNwbGF5X25hbWUiOiJ6YWlkIiwiZW1haWwiOiJ6YWlkQGdtYWlsLmNvbSIsImdlbmRlciI6Im1hbGUiLCJhZ2UiOjI1fSwiaWF0IjoxNjQ3OTA5NzQ1LCJleHAiOjE2NDc5MTMzNDV9.ygp8HK8tmbL0HKFGSkNmLbLCq8EoV9jq21GnUuQVnqg';
+const decoded = jwtDecode(token);
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
     createPost: (data, callBack) => {
        pool.query(
-         `insert into posts (suid,body) value (?,?)`,
-           [data.suid, data.body],
+         `insert into posts (suid,body) values (?,?)`,
+           [decoded.result.suid, data.body],
            (error,results) => {
              if (error) {
                callBack(error); //if error
@@ -28,7 +32,7 @@ module.exports = {
        );
      },
      //Profile Page
-    getPostsByUserId: (suid,callBack) => {
+    getPostsByUserID: (suid,callBack) => {
        pool.query(
          `select * from posts where suid = ?`,
          [suid],
@@ -44,7 +48,7 @@ module.exports = {
    
          pool.query(
            //data parameter
-           `update posts set body = ? where SUID = ? and PID = ?`,
+           `update posts set body = ? where suid = ? and pid = ?`,
              [
                data.body,
                data.suid,

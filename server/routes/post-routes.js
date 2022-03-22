@@ -1,14 +1,13 @@
 //This file just includes the routes for each of the endpoints
 
-const {createPost,getPostsByUserId,getPosts,updatePost,deletePost} = require('../controllers/post-controllers');
+const {createPost,getPostsByUserID,getPosts,updatePost,deletePost} = require('../controllers/post-controllers');
 const router = require('express').Router();
-//const {canDeleteUser,canEditUser} = require('../permissions/user-permissions')
-//const {checkToken} = require('../auth/token-validation');
+const {checkToken} = require('../auth/token-validation');
 
-router.post('/', createPost); //Signup Public
-router.get('/:suid', getPostsByUserId); //Public
-router.get('/', getPosts); //Public
-router.patch('/', updatePost); //Protected
-router.delete('/:pid', deletePost); //Protected
+router.post('/post', checkToken, createPost); //Signup Public
+router.get('/:suid', checkToken, getPostsByUserID); //Public
+router.get('/', checkToken, getPosts); //Public
+router.patch('/', checkToken, updatePost); //Protected
+router.delete('/:pid', checkToken, deletePost); //Protected
 
 module.exports = router;
