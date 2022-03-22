@@ -2,7 +2,6 @@
 
 const {createUser,login,getUserByUserId,getUsers,updateUser,deleteUser} = require('../controllers/user-controllers');
 const router = require('express').Router();
-//const {canDeleteUser,canEditUser} = require('../permissions/user-permissions')
 const {checkToken} = require('../auth/token-validation');
 
 router.post('/signup', createUser); //Signup Public
