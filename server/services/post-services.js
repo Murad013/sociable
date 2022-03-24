@@ -2,17 +2,18 @@
 // This is definitely a start though
 
 const pool = require('../config/database'); //connection to database
-//const {login} = require('../controllers/user-controllers');
 const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6MzIsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZGlzcGxheV9uYW1lIjoiTXVyZGE5NyIsImVtYWlsIjoibUBnbWFpbC5jb20iLCJnZW5kZXIiOiJNYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0NzkxNjk4NCwiZXhwIjoxNjQ4MDAzMzg0fQ.QsjeyzsqjWGCwVLCp_fHF0X0GBo6HhEaZF-gXnPdZbo'
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6MzIsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZGlzcGxheV9uYW1lIjoiTXVyZGE5NyIsImVtYWlsIjoibUBnbWFpbC5jb20iLCJnZW5kZXIiOiJNYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0ODEyMjg5NywiZXhwIjoxNjQ4MjA5Mjk3fQ.pwYgRLTJdxihd722Tnq_bt8uSD3j4NNqiCIUHBvnTek';
 const decoded = jwtDecode(token);
+
+
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
     createPost: (data, callBack) => {
        pool.query(
-         `insert into posts (suid,body) values (?,?)`,
-           [decoded.result.suid, data.body],
+         `insert into posts (suid,display_name,body) values (?,?,?)`,
+           [decoded.result.suid, decoded.result.display_name, data.body],
            (error,results) => {
              if (error) {
                callBack(error); //if error
