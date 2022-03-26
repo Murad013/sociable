@@ -47,26 +47,18 @@ function Home() {
                         <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <button onClick={post}>Post</button>
                     </div>
-                    <div className='posts' style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '90vh',
-                    overflow: 'hidden',
-                    }}>
+                    <div className='posts'>
                         <ul>
                             {posts?.map((t) => {
-                              return <li>{t.username}</li>
-                            }
-                            )}
-
-                            {posts?.map((t) => {
-                              return <li>{t.body}</li>
-                            }
-                            )}
-
-                            {posts?.map((t) => {
-                              return <li>{t.time_created}</li>
+                              return <li>
+                                <b>{t.username}</b><br></br>
+                                <div className = "postBox" style={{
+                                  width: '320px',
+                                  padding: '10px',
+                                  border: '5px solid gray',
+                                  margin: '0'
+                                }}>{t.body}</div><br></br>
+                                         {t.time_created}</li>
                             }
                             )}
                         </ul>

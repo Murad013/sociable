@@ -15,7 +15,7 @@
   margin: 10px;
 }
 
-ul{
+ul,li{
   border: 1px solid #333333;
   width: 200px;
   height: 100px;
