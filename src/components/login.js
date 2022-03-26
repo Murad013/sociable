@@ -7,29 +7,29 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
      const navigate = useNavigate();
-     const [display_name, setDisplayName] = useState('');
+     const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
 
 
      const login = () => {
-          Axios.post('http://localhost:3001/api/users/login', {
-            display_name: display_name,
+          Axios.post('/api/users/login', {
+            email: email,
             password: password
           }).then(() => {
-            swal(`Hey ${display_name}!`,"Welcome To Sociable!", "success");
+            swal(`Success!`,"Welcome Back!", "success");
             navigate('/home', { replace: true })
           }).catch(() => {
-            swal(`Sorry ${display_name}`, "Invalid Username or password", "error");
+            swal(`Sorry...`, "Invalid email or password", "error");
           });
         };
 
         return (
           <div className = "loginForm">
             <h1>Login to Sociable!</h1>
-            <input type = "text" placeholder='Display Name' name = "display_name" onChange ={(e) => {
-              setDisplayName(e.target.value);
+            <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
+              setEmail(e.target.value);
             }}/>
-            <input type = "text" placeholder='Password' name = "password" onChange ={(e) => {
+            <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
               setPassword(e.target.value);
             }}/>
             <button onClick={login}>Log In!</button>

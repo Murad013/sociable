@@ -1,4 +1,4 @@
-const {createUser, getUsers, getUserByUserId, updateUser, deleteUser, getUserByUsername} = require('../services/user-services');
+const {createUser, createUsername, getUsers, getUserByUserId, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
 
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcrypt'); 
@@ -26,9 +26,28 @@ module.exports = {
       });
     });
   },
+  createUsername: (req,res) => {
+    const body = req.body;
+    createUsername(body, (err,results) => {
+
+      if (err) {
+        return;
+      }
+      if (!results) {
+        return res.status(500).json({
+          success: 0,
+          message: "Database Connection Error"
+        });
+      }
+      return res.status(200).json({
+        success: 1,
+        data: results
+      });
+    });
+  },
   login: (req, res) => {
     const body = req.body;
-    getUserByUsername(body.display_name, (err, results) => {
+    getUserByEmail(body.email, (err, results) => {
       if (err) {
         console.log(err);
       }
@@ -36,7 +55,7 @@ module.exports = {
       if (!results) {
         return res.status(500).json({
           success: 0,
-          data: "Username doesn't exist."
+          data: "Email doesn't exist."
         });
       }
       const result = compareSync(body.password, results.password);
@@ -48,13 +67,13 @@ module.exports = {
 
         return res.status(200).json({
           success: 1,
-          message: "Login Successfully!",
+          message: "Logged in successfully",
           token: jsontoken
         });
       } else {
         return res.status(500).json({
           success: 0,
-          data: "Invalid username or password..."
+          data: "Invalid email or password..."
         });
       }
     });
@@ -109,7 +128,7 @@ module.exports = {
       if(!results){
         return res.json({
           success: 0,
-          message: 'This username is taken'
+          message: 'This email is taken'
         });
       }
       return res.json({

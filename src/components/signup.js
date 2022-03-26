@@ -9,7 +9,6 @@ function SignUp() {
      const navigate = useNavigate();
      const [firstname, setFirstName] = useState('');
      const [lastname, setLastName] = useState('');
-     const [display_name, setDisplayName] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
      const [gender, setGender] = useState('');
@@ -19,16 +18,15 @@ function SignUp() {
           Axios.post('http://localhost:3001/api/users/signup', {
             firstname: firstname,
             lastname: lastname,
-            display_name: display_name,
             email: email,
             password: password,
             gender: gender,
             age: age
           }).then(() => {
-            swal(`Hey ${firstname}!`,"Welcome To Sociable!", "success");
-            navigate('/home', { replace: true });
+                swal(`Success!`,"Please Choose Your Username!", "success");
+                navigate('/user', { replace: true });
           }).catch(() => {
-            swal(`Sorry ${firstname}`, "Username's Already Taken...", "error");
+            swal(`Sorry ${firstname}`, "Email's Already Taken...", "error");
           });
         };
 
@@ -41,13 +39,10 @@ function SignUp() {
             <input type = "text" placeholder='Last Name' name = "lastname" onChange ={(e) => {
               setLastName(e.target.value);
             }}/>
-            <input type = "text" placeholder='Display Name' name = "display_name" onChange ={(e) => {
-              setDisplayName(e.target.value);
-            }}/>
             <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
               setEmail(e.target.value);
             }}/>
-            <input type = "text" placeholder='Password' name = "password" onChange ={(e) => {
+            <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
               setPassword(e.target.value);
             }}/>
             <input type = "text" placeholder='Gender' name = "gender" onChange ={(e) => {

@@ -3,47 +3,67 @@ import Axios from 'axios';
 import {useState, useEffect} from 'react';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
+import '../styles/App.css';
 
 function Home() {
-     const [body, setBody] = useState('');
-     const post = () => {
-          Axios.post('http://localhost:3001/api/posts/post', {
-            body: body
-          }).then(() => {
-            swal('Success',"Post Successful", "success");
-          }).catch(() => {
-            swal("Error","Could Not Post", "error");
-          });
-        }
+  const [body, setBody] = useState('');
+  const[posts, setPosts] = useState([]);
+  const [time, setTime] = useState([]);
+  
+  const post = () => {
+    Axios.post('/api/posts/post', {
+      body: body
+    }).then(() => {
+      setBody('');
+      swal('Success',"Post Successful", "success");
+    }).catch(() => {
+      swal("Error","Could Not Post", "error");
+    });
+  }
 
-     const[posts, setPosts] = useState([]);
+
+     //getting all the posts on the homepage
      useEffect(() => {
-        fetch('api/posts')
-        .then((res) => res.json())
-        .then((json) => setPosts(json.body));
-     }, []);
+        Axios.get("/api/posts")
+        .then((json) => {
+          console.log(json)
+          setPosts(json.data.data);
+          setTime(json.data.data);
+        })
+     }, [posts,time]);
 
      return (
-          <div className='Home' style={{
+               <div className='Home' style={{
                display: 'flex',
                justifyContent: 'center',
                alignItems: 'center',
                height: '90vh'
-             }}>
-               <h1>Welcome!</h1>
-               <Link to={"/login"}><button>Logout!</button></Link>
-               <div className='postForm'>
-                    <input type='text' placeholder='Something on your mind?' name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
-
-               <button onClick={post}>Post</button>
-               </div>
-               <div className='posts'>
-               <ul>
-                {posts.map((t) => (
-                <li>{t.body}</li>
-                ))}
-               </ul>
-               </div>
+               }}>
+                    <h1>Welcome!</h1>
+                    <Link to={"/login"}><button>Logout!</button></Link>
+                    <div className='postForm'>
+                        <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                        <button onClick={post}>Post</button>
+                    </div>
+                    <div className='posts' style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '90vh'
+                    }}>
+                        <ul>
+                            {posts?.map((t) => {
+                              return <li>{t.body}</li>
+                            }
+                            )}
+                        </ul>
+                        <ul>
+                            {time?.map((t) => {
+                              return <li>{t.time_created}</li>
+                            }
+                            )}
+                        </ul>
+                    </div>
           </div>
      )
 }
