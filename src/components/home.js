@@ -49,15 +49,14 @@ function Home() {
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    height: '90vh'
+                    height: '90vh',
+                    overflow: 'hidden',
                     }}>
                         <ul>
                             {posts?.map((t) => {
                               return <li>{t.body}</li>
                             }
                             )}
-                        </ul>
-                        <ul>
                             {time?.map((t) => {
                               return <li>{t.time_created}</li>
                             }
