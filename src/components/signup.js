@@ -9,24 +9,28 @@ function SignUp() {
      const navigate = useNavigate();
      const [firstname, setFirstName] = useState('');
      const [lastname, setLastName] = useState('');
+     const [username, setUsername] = useState('');
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
      const [gender, setGender] = useState('');
      const [age, setAge] = useState('');
 
      const signup = () => {
-          Axios.post('http://localhost:3001/api/users/signup', {
+          Axios.post('/api/users/signup', {
             firstname: firstname,
             lastname: lastname,
+            username: username,
             email: email,
             password: password,
             gender: gender,
             age: age
           }).then(() => {
-                swal(`Success!`,"Please Choose Your Username!", "success");
-                navigate('/user', { replace: true });
+                swal(`Success!`,"What's a Fun Fact about yourself?", "success");
+                navigate('/userprofile', { replace: true });
           }).catch(() => {
-            swal(`Sorry ${firstname}`, "Email's Already Taken...", "error");
+            swal(`Sorry ${firstname}`, `${email} is already taken...`, "error");
+          }).catch(() => {
+            swal(`Sorry ${firstname}`, `${username} is already taken...`, "error");
           });
         };
 
@@ -38,6 +42,9 @@ function SignUp() {
             }}/>
             <input type = "text" placeholder='Last Name' name = "lastname" onChange ={(e) => {
               setLastName(e.target.value);
+            }}/>
+            <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
+              setUsername(e.target.value);
             }}/>
             <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
               setEmail(e.target.value);

@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../styles/App.css';
 
 function Home() {
+  const [username, setUsername] = useState([]);
   const [body, setBody] = useState('');
   const[posts, setPosts] = useState([]);
   const [time, setTime] = useState([]);
@@ -27,10 +28,11 @@ function Home() {
         Axios.get("/api/posts")
         .then((json) => {
           console.log(json)
+          setUsername(json.data.data);
           setPosts(json.data.data);
           setTime(json.data.data);
         })
-     }, [posts,time]);
+     }, [username,posts,time]);
 
      return (
                <div className='Home' style={{
@@ -54,10 +56,16 @@ function Home() {
                     }}>
                         <ul>
                             {posts?.map((t) => {
+                              return <li>{t.username}</li>
+                            }
+                            )}
+
+                            {posts?.map((t) => {
                               return <li>{t.body}</li>
                             }
                             )}
-                            {time?.map((t) => {
+
+                            {posts?.map((t) => {
                               return <li>{t.time_created}</li>
                             }
                             )}

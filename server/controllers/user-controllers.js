@@ -1,4 +1,4 @@
-const {createUser, createUsername, getUsers, getUserByUserId, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
+const {createUser, createProfile, getUsers, getUserByUserId, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
 
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcrypt'); 
@@ -26,9 +26,9 @@ module.exports = {
       });
     });
   },
-  createUsername: (req,res) => {
+  createProfile: (req,res) => {
     const body = req.body;
-    createUsername(body, (err,results) => {
+    createProfile(body, (err,results) => {
 
       if (err) {
         return;
