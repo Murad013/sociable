@@ -1,7 +1,7 @@
 const pool = require('../config/database'); //connection to database
 
 const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NywiZmlyc3RuYW1lIjoiTXVyYWQiLCJsYXN0bmFtZSI6IlNhbGFtZWgiLCJlbWFpbCI6InphaWRAZ21haWwuY29tIiwiZ2VuZGVyIjoibWFsZSIsImFnZSI6MjV9LCJpYXQiOjE2NDgyNTc0MDMsImV4cCI6MTY1MTg1NzQwM30.vNLs-gBKT80__-Wv9Xa5FJaxT8ED6F-50JeMV4QjC3s';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NDgsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJpb0BnbWFpbC5jb20iLCJnZW5kZXIiOiJtYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0ODI2ODcxMSwiZXhwIjoxNjUxODY4NzExfQ.O-izOp2e36uasEncdSkELHVEBdS0Uw9GHXAkxYWS_Og';
 const decoded = jwtDecode(token);
 
 module.exports = {

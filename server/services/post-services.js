@@ -3,7 +3,7 @@
 
 const pool = require('../config/database'); //connection to database
 const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6MzIsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJtQGdtYWlsLmNvbSIsImdlbmRlciI6Ik1hbGUiLCJhZ2UiOjI1fSwiaWF0IjoxNjQ4MjQwNDkwLCJleHAiOjE2NTE4NDA0OTB9.aAvmtlXD7GD-avC8FaNWrH-331Hic5Q3XyVOx9G5j-I';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NDgsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJpb0BnbWFpbC5jb20iLCJnZW5kZXIiOiJtYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0ODI2ODcxMSwiZXhwIjoxNjUxODY4NzExfQ.O-izOp2e36uasEncdSkELHVEBdS0Uw9GHXAkxYWS_Og';
 const decoded = jwtDecode(token);
 
 module.exports = {
@@ -23,7 +23,7 @@ module.exports = {
      //Homepage
     getPosts: callBack => {
        pool.query(
-         `select * from posts`,
+         `select * from posts ORDER BY time_created DESC;`,
          [],
          (error,results) => {
            if(error){
