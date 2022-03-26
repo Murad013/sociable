@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import '../styles/App.css';
 
 function Home() {
+  const [username, setUsername] = useState([]);
   const [body, setBody] = useState('');
   const[posts, setPosts] = useState([]);
   const [time, setTime] = useState([]);
@@ -27,10 +28,11 @@ function Home() {
         Axios.get("/api/posts")
         .then((json) => {
           console.log(json)
+          setUsername(json.data.data);
           setPosts(json.data.data);
           setTime(json.data.data);
         })
-     }, [posts,time]);
+     }, [username,posts,time]);
 
      return (
                <div className='Home' style={{
@@ -45,21 +47,18 @@ function Home() {
                         <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <button onClick={post}>Post</button>
                     </div>
-                    <div className='posts' style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    height: '90vh'
-                    }}>
+                    <div className='posts'>
                         <ul>
                             {posts?.map((t) => {
-                              return <li>{t.body}</li>
-                            }
-                            )}
-                        </ul>
-                        <ul>
-                            {time?.map((t) => {
-                              return <li>{t.time_created}</li>
+                              return <li>
+                                <b>{t.username}</b><br></br>
+                                <div className = "postBox" style={{
+                                  width: '320px',
+                                  padding: '10px',
+                                  border: '5px solid gray',
+                                  margin: '0'
+                                }}>{t.body}</div><br></br>
+                                         {t.time_created}</li>
                             }
                             )}
                         </ul>

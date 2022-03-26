@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 function Username() {
      const navigate = useNavigate();
-     const [username, setUsername] = useState('');
+     const [bio, setBio] = useState('');
 
-     const createUsername = () => {
-     Axios.post('http://localhost:3001/api/users/username', {
-       username: username
+     const createProfile = () => {
+     Axios.post('/api/users/profile', {
+       bio: bio
      }).then(() => {
-         swal(`Hey ${username}!`,"Welcome To Sociable!", "success");
+         swal(`Success!`,"Welcome To Sociable!", "success");
          navigate('/home', { replace: true });
      }).catch(() => {
        swal(`Sorry...`, "Username's Already Taken...", "error");
@@ -20,11 +20,11 @@ function Username() {
    return (
         
      <div className = "signUpForm">
-          <h3>Username Selection</h3>
-          <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
-          setUsername(e.target.value);
+          <h3>Bio</h3>
+          <input type = "text" placeholder='Tell Us Something Fun About Yourself' name = "bio" onChange ={(e) => {
+          setBio(e.target.value);
      }}/>
-     <button onClick={createUsername}>Submit!</button>
+     <button onClick={createProfile}>Submit!</button>
      </div>
    )
 }

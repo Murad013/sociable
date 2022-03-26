@@ -1,19 +1,20 @@
 const pool = require('../config/database'); //connection to database
 
 const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NDgsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJpb0BnbWFpbC5jb20iLCJnZW5kZXIiOiJtYWxlIiwiYWdlIjoyNX0sImlhdCI6MTY0ODI2ODcxMSwiZXhwIjoxNjUxODY4NzExfQ.O-izOp2e36uasEncdSkELHVEBdS0Uw9GHXAkxYWS_Og';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NjYsImZpcnN0bmFtZSI6IlNlYW4iLCJsYXN0bmFtZSI6IkdvdWxkIiwiZW1haWwiOiJzZWFuZ291bGRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzZWFuIiwiZ2VuZGVyIjoibWFsZSIsImFnZSI6MjJ9LCJpYXQiOjE2NDgzMTM5MzEsImV4cCI6MTY1MTkxMzkzMX0.fDzt3qWUVleLY1FtPR-ReiCeXp0aj_eT5b7KsWn-LnA';
 const decoded = jwtDecode(token);
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
   
     createUser: (data, callBack) => {
-      const query = `INSERT INTO user (firstname,lastname,email,password,gender,age)
-                     VALUES(?,?,?,?,?,?);`
+      const query = `INSERT INTO user (firstname,lastname,username,email,password,gender,age)
+                     VALUES(?,?,?,?,?,?,?);`
        pool.query(query,
            [
              data.firstname,
              data.lastname,
+             data.username,
              data.email,
              data.password,
              data.gender,
@@ -27,11 +28,10 @@ module.exports = {
            }
        );
      },
-     createUsername: (data, callBack) => {
-       pool.query(`INSERT INTO profile (suid,username) VALUES(?,?);`,
-       [decoded.result.suid, data.username],
+     createProfile: (data,callBack) => {
+       pool.query(`INSERT INTO profile (suid,username,bio) VALUES(?,?,?);`,
+       [decoded.result.suid, decoded.result.username,data.bio],
            (error,results) => {
-             console.log(error,results)
              if (error) {
                callBack(error); //if error
              }
