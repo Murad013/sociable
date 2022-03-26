@@ -5,6 +5,7 @@ import Login from './components/Login';
 import Navbar from './components/Navbar/Navbar';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from "./components/Home";
+import Username from "./components/Username";
 import About from './pages/about';
 import Contact from './pages/contact';
 
@@ -15,6 +16,7 @@ function App() {
             <Navbar/>
             <Routes>
               <Route exact path="/" element={<SignUp />} />
+              <Route exact path='/user' element={<Username />} />
               <Route exact path="/login" element={<Login />} />
               <Route path="/home" element={<Home />} />
               <Route path='/about' element={<About/>} />

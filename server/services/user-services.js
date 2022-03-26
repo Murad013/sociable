@@ -1,16 +1,19 @@
 const pool = require('../config/database'); //connection to database
 
+const jwtDecode = require('jwt-decode');
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NywiZmlyc3RuYW1lIjoiTXVyYWQiLCJsYXN0bmFtZSI6IlNhbGFtZWgiLCJlbWFpbCI6InphaWRAZ21haWwuY29tIiwiZ2VuZGVyIjoibWFsZSIsImFnZSI6MjV9LCJpYXQiOjE2NDgyNTc0MDMsImV4cCI6MTY1MTg1NzQwM30.vNLs-gBKT80__-Wv9Xa5FJaxT8ED6F-50JeMV4QjC3s';
+const decoded = jwtDecode(token);
+
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
   
     createUser: (data, callBack) => {
-      const query = `INSERT INTO user (firstname,lastname,display_name,email,password,gender,age)
-                     VALUES(?,?,?,?,?,?,?);`
+      const query = `INSERT INTO user (firstname,lastname,email,password,gender,age)
+                     VALUES(?,?,?,?,?,?);`
        pool.query(query,
            [
              data.firstname,
              data.lastname,
-             data.display_name,
              data.email,
              data.password,
              data.gender,
@@ -24,11 +27,23 @@ module.exports = {
            }
        );
      },
+     createUsername: (data, callBack) => {
+       pool.query(`INSERT INTO profile (suid,username) VALUES(?,?);`,
+       [decoded.result.suid, data.username],
+           (error,results) => {
+             console.log(error,results)
+             if (error) {
+               callBack(error); //if error
+             }
+             return callBack(null, results); //if no error
+           }
+       );
+     },
      //Login service
-    getUserByUsername: (display_name, callBack) => {
+    getUserByEmail: (email, callBack) => {
       pool.query(
-        `SELECT * FROM user WHERE display_name = ?`,
-        [display_name],
+        `SELECT * FROM user WHERE email = ?`,
+        [email],
         (error,results) => {
           if(error){
             callBack(error);
@@ -65,11 +80,10 @@ module.exports = {
    
          pool.query(
            //data parameter
-           `update user set firstname = ?, lastname = ?, display_name = ?, email = ?, password = ?, gender = ?, age = ? where suid = ?`,
+           `update user set firstname = ?, lastname = ?, email = ?, password = ?, gender = ?, age = ? where suid = ?`,
              [
                data.firstname,
                data.lastname,
-               data.display_name,
                data.email,
                data.password,
                data.gender,

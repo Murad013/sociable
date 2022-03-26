@@ -52,6 +52,7 @@ module.exports = {
           message: "No posts found"
         });
       }
+      
       return res.status(200).json({
         success: 1,
         data: results
