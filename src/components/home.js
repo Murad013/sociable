@@ -2,8 +2,6 @@ import React from 'react';
 import Axios from 'axios';
 import {useState, useEffect} from 'react';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom';
-import '../styles/App.css';
 
 function Home() {
   const [username, setUsername] = useState([]);
@@ -27,7 +25,6 @@ function Home() {
      useEffect(() => {
         Axios.get("/api/posts")
         .then((json) => {
-          console.log(json)
           setUsername(json.data.data);
           setPosts(json.data.data);
           setTime(json.data.data);
@@ -35,30 +32,26 @@ function Home() {
      }, [username,posts,time]);
 
      return (
-               <div className='Home' style={{
-               display: 'flex',
-               justifyContent: 'center',
-               alignItems: 'center',
-               height: '90vh'
-               }}>
+               <div className='Home' style={{textAlign: 'center'}}>
                     <h1>Welcome!</h1>
-                    <Link to={"/login"}><button>Logout!</button></Link>
                     <div className='postForm'>
                         <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <button onClick={post}>Post</button>
                     </div>
-                    <div className='posts'>
-                        <ul>
+                    <div className='posts' style={{textAlign : 'center'}}>
+                        <ul style={{textAlign: 'center'}}>
                             {posts?.map((t) => {
-                              return <li>
-                                <b>{t.username}</b><br></br>
-                                <div className = "postBox" style={{
-                                  width: '320px',
-                                  padding: '10px',
-                                  border: '5px solid gray',
-                                  margin: '0'
-                                }}>{t.body}</div><br></br>
-                                         {t.time_created}</li>
+                              return <li style={{
+                                display: 'inline-block',
+                                border: '1px solid #ccc',
+                                borderRadius: 6,
+                                padding: 15,
+                                margin: '10px 0',
+                                overflow: 'hidden'
+                              }}>
+                                <b>{t.username}</b>
+                                {t.body}<br></br>
+                                {t.time_created}</li>
                             }
                             )}
                         </ul>

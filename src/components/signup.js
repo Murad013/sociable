@@ -29,8 +29,6 @@ function SignUp() {
                 navigate('/userprofile', { replace: true });
           }).catch(() => {
             swal(`Sorry ${firstname}`, `${email} is already taken...`, "error");
-          }).catch(() => {
-            swal(`Sorry ${firstname}`, `${username} is already taken...`, "error");
           });
         };
 
