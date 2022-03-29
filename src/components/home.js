@@ -2,6 +2,7 @@ import React from 'react';
 import Axios from 'axios';
 import {useState, useEffect} from 'react';
 import swal from 'sweetalert';
+import '../styles/App.css';
 
 function Home() {
   const [username, setUsername] = useState([]);
@@ -10,7 +11,7 @@ function Home() {
   const [time, setTime] = useState([]);
   
   const post = () => {
-    Axios.post('/api/posts/post', {
+    Axios.post('http://localhost:3001/api/posts/post', {
       body: body
     }).then(() => {
       setBody('');
@@ -19,11 +20,9 @@ function Home() {
       swal("Error","Could Not Post", "error");
     });
   }
-
-
      //getting all the posts on the homepage
      useEffect(() => {
-        Axios.get("/api/posts")
+        Axios.get("http://localhost:3001/api/posts")
         .then((json) => {
           setUsername(json.data.data);
           setPosts(json.data.data);
@@ -38,8 +37,7 @@ function Home() {
                         <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <button onClick={post}>Post</button>
                     </div>
-                    <div className='posts' style={{textAlign : 'center'}}>
-                        <ul style={{textAlign: 'center'}}>
+                    <ul>
                             {posts?.map((t) => {
                               return <li style={{
                                 display: 'inline-block',
@@ -51,11 +49,11 @@ function Home() {
                               }}>
                                 <b>{t.username}</b>
                                 {t.body}<br></br>
-                                {t.time_created}</li>
+                                {t.time_created}
+                                </li>
                             }
                             )}
-                        </ul>
-                    </div>
+                    </ul>
           </div>
      )
 }

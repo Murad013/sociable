@@ -8,7 +8,7 @@ function Username() {
      const [bio, setBio] = useState('');
 
      const createProfile = () => {
-     Axios.post('/api/users/profile', {
+     Axios.post('http://localhost:3001/api/users/profile', {
        bio: bio
      }).then(() => {
          swal(`Success!`,"Welcome To Sociable!", "success");

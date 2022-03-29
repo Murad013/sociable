@@ -16,7 +16,7 @@ function SignUp() {
      const [age, setAge] = useState('');
 
      const signup = () => {
-          Axios.post('/api/users/signup', {
+          Axios.post('http://localhost:3001/api/users/signup', {
             firstname: firstname,
             lastname: lastname,
             username: username,

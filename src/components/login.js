@@ -12,7 +12,7 @@ function Login() {
 
 
      const login = () => {
-          Axios.post('/api/users/login', {
+          Axios.post('http://localhost:3001/api/users/login', {
             email: email,
             password: password
           }).then(() => {
