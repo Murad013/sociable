@@ -40,14 +40,17 @@ function Home() {
                     <ul>
                             {posts?.map((t) => {
                               return <li style={{
-                                display: 'inline-block',
+                                display: 'block',
+                                background: '#256ce1',
+                                color: 'white',
                                 border: '1px solid #ccc',
                                 borderRadius: 6,
-                                padding: 15,
-                                margin: '10px 0',
-                                overflow: 'hidden'
+                                padding: '15 15 15 15',
+                                margin: '10px 10px 0 0',
+                                overflow: 'hidden',
                               }}>
                                 <b>{t.username}</b>
+                                <br></br>
                                 {t.body}<br></br>
                                 {t.time_created}
                                 </li>
