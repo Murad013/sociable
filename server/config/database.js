@@ -6,6 +6,7 @@ const pool = createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.MYSQL_DB,
+  dateStrings: 'date',
   connectionLimit: 10
 });
 
