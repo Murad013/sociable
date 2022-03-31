@@ -1,7 +1,7 @@
 const {createUser, createProfile, getUsers, getUserByUserId, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
 
 //Importing methods used from bcrypt package for encrypting passwords
-const {genSaltSync,hashSync,compareSync} = require('bcrypt'); 
+const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
 const {sign} = require('jsonwebtoken');
 
 // a module is a collection of javascript functions and objects that can be used by external applications
