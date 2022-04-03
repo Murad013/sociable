@@ -1,7 +1,11 @@
 const {createUser, createProfile, getUsers, getUserByUserId, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
+
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
 const {sign} = require('jsonwebtoken');
+const generateToken = require('../auth/generateToken');
+const { StrictMode } = require('react');
+const cookie = require('cookie');
 
 
 // a module is a collection of javascript functions and objects that can be used by external applications
@@ -62,15 +66,13 @@ module.exports = {
       if (result) {
         results.password = undefined;
         //***try to find a way to export this jsontoken so that you can just use it as needed***/
-          const jsontoken = sign({result: results}, process.env.KEY, {
-          expiresIn: "1000h"
+        const jsontoken = sign({result: results}, process.env.KEY, {
+          expiresIn: "1000"
         });
         
-        return res.status(200).json({
-          success: 1,
-          message: "Logged in successfully",
-          token: jsontoken
-        });
+        res.cookie('jsontoken', jsontoken, {httpOnly: true});
+        res.send('it worked')
+
       } else {
         return res.status(500).json({
           success: 0,

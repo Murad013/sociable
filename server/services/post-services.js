@@ -6,6 +6,7 @@ const jwtDecode = require('jwt-decode');
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NjYsImZpcnN0bmFtZSI6IlNlYW4iLCJsYXN0bmFtZSI6IkdvdWxkIiwiZW1haWwiOiJzZWFuZ291bGRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzZWFuIiwiZ2VuZGVyIjoibWFsZSIsImFnZSI6MjIsInBmcCI6bnVsbH0sImlhdCI6MTY0ODU3MDczMCwiZXhwIjoxNjUyMTcwNzMwfQ.eXBmQ3ksR_spX1SjBK5hozNcWxLEXZYNVDhVkisBfOc';
 const decoded = jwtDecode(token);
 
+
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
     createPost: (data, callBack) => {

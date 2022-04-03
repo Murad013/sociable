@@ -22,7 +22,9 @@ function Home() {
   }
      //getting all the posts on the homepage
      useEffect(() => {
-        Axios.get("http://localhost:3001/api/posts")
+        Axios.get("http://localhost:3001/api/posts", {
+          withCredentials: true
+        })
         .then((json) => {
           setUsername(json.data.data);
           setPosts(json.data.data);
