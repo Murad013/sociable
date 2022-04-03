@@ -7,7 +7,7 @@ import '../styles/App.css';
 function Home() {
   const [username, setUsername] = useState([]);
   const [body, setBody] = useState('');
-  const[posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState([]);
   const [time, setTime] = useState([]);
   
   const post = () => {
@@ -28,7 +28,7 @@ function Home() {
           setPosts(json.data.data);
           setTime(json.data.data);
         })
-     }, [username,posts,time]);
+     }, []);
 
      return (
                <div className='Home' style={{textAlign: 'center'}}>
@@ -52,6 +52,22 @@ function Home() {
                                 overflow: 'hidden',
                                 width: '50%'
                               }}>
+                                <button style={{
+                                  display:'inline-block',
+                                  padding: '0.35em 1.2em',
+                                  border: '0.1em solid #FFFFFF',
+                                  margin: '0 0.3em 0.3em 0',
+                                  borderRadius: '0.12em',
+                                  boxSizing: 'border-box',
+                                  textDecoration:'none',
+                                  fontFamily:'sans-serif', 
+                                  fontWeight:300,
+                                  color:'#FFFFFF',
+                                 textAlign:'center',
+                                 transition: 'all 0.2s'
+                                }}>Edit</button>
+                                <button>Delete</button>
+                                <br></br>
                                 <b>{t.username}</b>
                                 <br></br>
                                 {t.body}<br></br>
