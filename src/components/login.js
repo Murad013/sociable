@@ -15,6 +15,8 @@ function Login() {
           Axios.post('http://localhost:3001/api/users/login', {
             email: email,
             password: password
+          }, {
+            withCredentials: true
           }).then(() => {
             swal(`Success!`,"Welcome Back!", "success");
             navigate('/home', { replace: true })
