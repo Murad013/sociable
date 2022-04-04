@@ -12,6 +12,7 @@ function Home() {
     Axios.post('http://localhost:3001/api/posts/post', {
       body: body
     }).then(() => {
+      setBody('');
       swal('Success', "Post Successful", "success");
       getPosts();
     }).catch(() => {
