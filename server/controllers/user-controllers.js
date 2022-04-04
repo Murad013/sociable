@@ -3,9 +3,6 @@ const {createUser, createProfile, getUsers, getUserByUserId, updateUser, deleteU
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
 const {sign} = require('jsonwebtoken');
-const generateToken = require('../auth/generateToken');
-const { StrictMode } = require('react');
-const cookie = require('cookie');
 
 
 // a module is a collection of javascript functions and objects that can be used by external applications
@@ -65,14 +62,16 @@ module.exports = {
       const result = compareSync(body.password, results.password);
       if (result) {
         results.password = undefined;
-        //***try to find a way to export this jsontoken so that you can just use it as needed***/
-        const jsontoken = sign({result: results}, process.env.KEY, {
+        const token = sign({result: results}, process.env.KEY, {
           expiresIn: "1000"
         });
         
-        res.cookie('jsontoken', jsontoken, {httpOnly: true});
-        res.send('it worked')
-
+        res.cookie('token', token, {httpOnly: true});
+        return res.status(200).json({
+          success: 1,
+          message: "Successful Login!",
+          token: token
+        });
       } else {
         return res.status(500).json({
           success: 0,
@@ -102,7 +101,7 @@ module.exports = {
       });
     });
   },
-  getUsers: (req,res) => {
+  getUsers: (res) => {
     getUsers((err, results) => {
       if (err) {
         console.log(err);

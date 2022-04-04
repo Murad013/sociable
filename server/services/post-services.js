@@ -3,9 +3,8 @@
 
 const pool = require('../config/database'); //connection to database
 const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NjYsImZpcnN0bmFtZSI6IlNlYW4iLCJsYXN0bmFtZSI6IkdvdWxkIiwiZW1haWwiOiJzZWFuZ291bGRAZ21haWwuY29tIiwidXNlcm5hbWUiOiJzZWFuIiwiZ2VuZGVyIjoibWFsZSIsImFnZSI6MjIsInBmcCI6bnVsbH0sImlhdCI6MTY0ODU3MDczMCwiZXhwIjoxNjUyMTcwNzMwfQ.eXBmQ3ksR_spX1SjBK5hozNcWxLEXZYNVDhVkisBfOc';
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NjUsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJtdXJhZHNhbGFtZWgwMTNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJtdXJkYSIsImdlbmRlciI6Im1hbGUiLCJhZ2UiOjI1LCJwZnAiOm51bGx9LCJpYXQiOjE2NDkwMzg1OTgsImV4cCI6MTY0OTAzODU5OX0.eOP1dyVrmV_YdMbFRq2jk6uRDj1gQD7A4HDaPAaReTo';
 const decoded = jwtDecode(token);
-
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
