@@ -41,7 +41,6 @@ module.exports = {
     });
   },
   getPosts: (req,res) => {
-    console.log(req.cookies.jsontoken)
     getPosts((err, results) => {
       if (err) {
         console.log(err);
