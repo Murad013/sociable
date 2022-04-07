@@ -4,7 +4,6 @@ const pool = require('../config/database'); //connection to database
 // const decoded = jwtDecode(token);
 // const {checkToken} = require('../auth/token-validation');
 
-
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
   

@@ -11,7 +11,9 @@ function Home() {
   const post = () => {
     Axios.post('http://localhost:3001/api/posts/post', {
       body: body
-    }).then(() => {
+    },
+    {withCredentials: true}
+    ).then(() => {
       setBody('');
       swal('Success', "Post Successful", "success");
       getPosts();
@@ -21,6 +23,12 @@ function Home() {
   }
   const getPosts = () => {
     Axios.get("http://localhost:3001/api/posts", {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       withCredentials: true
     })
     .then((json) => {

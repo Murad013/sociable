@@ -1,7 +1,11 @@
 const {createPost, getPosts, getPostsByUserID, updatePost, deletePost} = require('../services/post-services');
+const jwtDecode = require('jwt-decode');
 module.exports = {
   createPost: (req, res) => {
-    createPost(req.body, (err, results) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    console.log(decoded);
+    createPost(decoded.result,req.body, (err, results) => {
       if (err) {
         console.log(err)
         return;
