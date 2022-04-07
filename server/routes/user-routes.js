@@ -1,4 +1,4 @@
-//This file just includes the routes for each of the endpoints
+//This file just includes the routes for each of the user endpoints
 
 const {createUser,createProfile,login,getUserByUserId,getUsers,updateUser,deleteUser} = require('../controllers/user-controllers');
 const router = require('express').Router();

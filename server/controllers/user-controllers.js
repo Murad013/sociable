@@ -59,14 +59,14 @@ module.exports = {
           data: "Email doesn't exist."
         });
       }
-      const result = compareSync(body.password, results.password);
-      if (result) {
+      const match = compareSync(body.password, results.password); //compares password inputted by user to hashed password stored in database and returns true or false
+      if (match) {
         results.password = undefined;
         const token = sign({result: results}, process.env.KEY, {
           expiresIn: "1000"
         });
         
-        res.cookie('token', token, {httpOnly: true});
+        res.cookie('authorization', token, {httpOnly: true});
         return res.status(200).json({
           success: 1,
           message: "Successful Login!",

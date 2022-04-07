@@ -1,13 +1,15 @@
 const pool = require('../config/database'); //connection to database
-const jwtDecode = require('jwt-decode');
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NjUsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJtdXJhZHNhbGFtZWgwMTNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJtdXJkYSIsImdlbmRlciI6Im1hbGUiLCJhZ2UiOjI1LCJwZnAiOm51bGx9LCJpYXQiOjE2NDkwMzg1OTgsImV4cCI6MTY0OTAzODU5OX0.eOP1dyVrmV_YdMbFRq2jk6uRDj1gQD7A4HDaPAaReTo';
-const decoded = jwtDecode(token);
+// const jwtDecode = require('jwt-decode');
+// const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXN1bHQiOnsic3VpZCI6NjUsImZpcnN0bmFtZSI6Ik11cmFkIiwibGFzdG5hbWUiOiJTYWxhbWVoIiwiZW1haWwiOiJtdXJhZHNhbGFtZWgwMTNAZ21haWwuY29tIiwidXNlcm5hbWUiOiJtdXJkYSIsImdlbmRlciI6Im1hbGUiLCJhZ2UiOjI1LCJwZnAiOm51bGx9LCJpYXQiOjE2NDkwMzg1OTgsImV4cCI6MTY0OTAzODU5OX0.eOP1dyVrmV_YdMbFRq2jk6uRDj1gQD7A4HDaPAaReTo';
+// const decoded = jwtDecode(token);
+// const {checkToken} = require('../auth/token-validation');
+
 
 module.exports = {
   //Find out how to add display_name and suid to the profile table after sign_up
   
     createUser: (data, callBack) => {
-      const query = `INSERT INTO user (firstname,lastname,username,email,password,gender,age)
+      const query = `INSERT INTO users (firstname,lastname,username,email,password,gender,age)
                      VALUES(?,?,?,?,?,?,?);`
        pool.query(query,
            [
@@ -20,6 +22,7 @@ module.exports = {
              data.age
            ],
            (error,results) => {
+             console.log(error);
              if (error) {
                callBack(error); //if error
              }
@@ -27,10 +30,14 @@ module.exports = {
            }
        );
      },
+
+     //Can add on more to profile but as of now this will suffice
      createProfile: (data,callBack) => {
-       pool.query(`INSERT INTO profile (suid,username,bio) VALUES(?,?,?);`,
-       [decoded.result.suid, decoded.result.username,data.bio],
+      console.log(data);
+       pool.query(`INSERT INTO profile (bio) VALUES(?);`,
+       [data.bio],
            (error,results) => {
+             console.log(error);
              if (error) {
                callBack(error); //if error
              }
@@ -41,7 +48,7 @@ module.exports = {
      //Login service
     getUserByEmail: (email, callBack) => {
       pool.query(
-        `SELECT * FROM user WHERE email = ?`,
+        `SELECT * FROM users WHERE email = ?`,
         [email],
         (error,results) => {
           if(error){
@@ -53,7 +60,7 @@ module.exports = {
     },
     getUsers: callBack => {
        pool.query(
-         `select * from user`,
+         `select * from users`,
          [],
          (error,results) => {
            if(error){
@@ -65,7 +72,7 @@ module.exports = {
      },
     getUserByUserId: (suid,callBack) => {
        pool.query(
-         `select * from user where suid = ?`,
+         `select * from users where suid = ?`,
          [suid],
          (error,results) => {
            if(error){
@@ -79,7 +86,7 @@ module.exports = {
    
          pool.query(
            //data parameter
-           `update user set firstname = ?, lastname = ?, email = ?, password = ?, gender = ?, age = ? where suid = ?`,
+           `update users set firstname = ?, lastname = ?, email = ?, password = ?, gender = ?, age = ? where suid = ?`,
              [
                data.firstname,
                data.lastname,
@@ -100,7 +107,7 @@ module.exports = {
      },
     deleteUser: (suid, callBack) => {
        pool.query(
-         `delete from user where suid = ?`,
+         `delete from users where suid = ?`,
          [suid],
          (error,results) => {
            // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
