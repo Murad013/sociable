@@ -8,7 +8,6 @@ const {sign} = require('jsonwebtoken');
 // a module is a collection of javascript functions and objects that can be used by external applications
 module.exports = {
   createUser: (req, res) => {
-    const token = req.cookie;
     const body = req.body;
     const salt = genSaltSync(10);
     body.password = hashSync(body.password, salt);
