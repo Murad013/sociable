@@ -24,9 +24,11 @@ function SignUp() {
             password: password,
             gender: gender,
             age: age
+          },{
+            withCredentials: true
           }).then(() => {
-                swal(`Success!`,"What's a Fun Fact about yourself?", "success");
-                navigate('/userprofile', { replace: true });
+                swal(`Success!`,"Please Log In!", "success");
+                navigate('/login', { replace: true });
           }).catch(() => {
             swal(`Sorry ${firstname}`, `${email} is already taken...`, "error");
           });

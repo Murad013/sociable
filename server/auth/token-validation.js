@@ -2,7 +2,7 @@ const{verify}=require('jsonwebtoken');
 
 module.exports = {
      checkToken: (req,res,next) => {
-          let token = req.get('authorization');
+          let token = req.get("authorization");
           if(token){
                token = token.slice(7); //'Bearer' is removed 
                verify(token,process.env.KEY,(err, decoded) => {

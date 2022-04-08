@@ -14,8 +14,8 @@ function Home() {
     },
     {withCredentials: true}
     ).then(() => {
-      setBody('');
       swal('Success', "Post Successful", "success");
+      setBody('');
       getPosts();
     }).catch(() => {
       swal("Error", "Could Not Post", "error");

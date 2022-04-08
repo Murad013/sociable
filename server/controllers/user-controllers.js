@@ -3,7 +3,7 @@ const {createUser, createProfile, getUsers, getUserByUserId, updateUser, deleteU
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
 const {sign} = require('jsonwebtoken');
-
+const jwtDecode = require('jwt-decode');
 
 // a module is a collection of javascript functions and objects that can be used by external applications
 module.exports = {
@@ -28,9 +28,9 @@ module.exports = {
     });
   },
   createProfile: (req,res) => {
-    const body = req.body;
-    createProfile(body, (err,results) => {
-
+    let token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    createProfile(decoded.result, req.body, (err,results) => {
       if (err) {
         return;
       }
@@ -63,7 +63,7 @@ module.exports = {
       if (match) {
         results.password = undefined;
         const token = sign({result: results}, process.env.KEY, {
-          expiresIn: "24h"
+          expiresIn: "1hr"
         });
         
         res.cookie('authorization', token, {httpOnly: true, sameSite: 'strict'});
