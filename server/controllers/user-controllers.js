@@ -1,4 +1,4 @@
-const {createUser, createProfile, getUsers, getUserByUsername, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
+const {createUser, createProfile, getUsers, getUserByUsername, getUserByUserID, getProfileInfo, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
 
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
@@ -9,8 +9,8 @@ const jwtDecode = require('jwt-decode');
 module.exports = {
   createUser: (req, res) => {
     const body = req.body;
-    const salt = genSaltSync(10);
-    body.password = hashSync(body.password, salt);
+    const salt = genSaltSync(10); //Generates random string of 10 characters so that they are appended to the password before hashing
+    body.password = hashSync(body.password, salt); //password has salt string added to it before hashing for extra security measures
     createUser(body, (err, results) => {
       if (err) {
         return;
@@ -102,7 +102,7 @@ module.exports = {
       });
     });
   },
-  getUsers: (res) => {
+  getUsers: (req, res) => {
     getUsers((err, results) => {
       if (err) {
         console.log(err);
@@ -114,6 +114,52 @@ module.exports = {
           message: "No users found"
         });
       }
+      return res.status(200).json({
+        success: 1,
+        data: results
+      });
+    });
+  },
+  getUserByUserID: (req,res) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    getUserByUserID(decoded.result, (err, results) => {
+      //If there is an error, console.log that error and return nothing
+      if(err) {
+        console.log(err);
+        return;
+      }
+      //If no records were found
+      if(!results) {
+        return res.status(500).json({
+          success: 0,
+          message: 'No users were found with that user ID'
+        });
+      }
+      //If success, return user information
+      return res.status(200).json({
+        success: 1,
+        data: results
+      });
+    });
+  },
+  getProfileInfo: (req,res) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    getProfileInfo(decoded.result, (err, results) => {
+      //If there is an error, console.log that error and return nothing
+      if(err) {
+        console.log(err);
+        return;
+      }
+      //If no records were found
+      if(!results) {
+        return res.status(500).json({
+          success: 0,
+          message: 'No profile was found with that username'
+        });
+      }
+      //If success, return user profile information
       return res.status(200).json({
         success: 1,
         data: results
