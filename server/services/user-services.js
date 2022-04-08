@@ -31,10 +31,9 @@ module.exports = {
      },
 
      //Can add on more to profile but as of now this will suffice
-     createProfile: (data,callBack) => {
-      console.log(data);
-       pool.query(`INSERT INTO profile (bio) VALUES(?);`,
-       [data.bio],
+     createProfile: (userInfo, data,callBack) => {
+       pool.query(`INSERT INTO profile (suid, username, pfp, bio) VALUES(?,?,?,?);`,
+       [userInfo.suid, userInfo.username, data.pfp, data.pfp, data.bio],
            (error,results) => {
              console.log(error);
              if (error) {

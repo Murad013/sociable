@@ -4,8 +4,7 @@ module.exports = {
   createPost: (req, res) => {
     const token = req.cookies.authorization;
     const decoded = jwtDecode(token);
-    console.log(decoded);
-    createPost(decoded.result,req.body, (err, results) => {
+    createPost(decoded.result, req.body, (err, results) => {
       if (err) {
         console.log(err)
         return;
