@@ -21,7 +21,6 @@ module.exports = {
              data.age
            ],
            (error,results) => {
-             console.log(error);
              if (error) {
                callBack(error); //if error
              }
@@ -32,8 +31,8 @@ module.exports = {
 
      //Can add on more to profile but as of now this will suffice
      createProfile: (userInfo, data,callBack) => {
-       pool.query(`INSERT INTO profile (suid, username, pfp, bio) VALUES(?,?,?,?);`,
-       [userInfo.suid, userInfo.username, data.pfp, data.pfp, data.bio],
+       pool.query(`INSERT INTO profile (suid, username, bio, pfp) VALUES(?,?,?,?);`,
+       [userInfo.suid, userInfo.username, data.bio, data.pfp],
            (error,results) => {
              console.log(error);
              if (error) {
@@ -68,10 +67,11 @@ module.exports = {
            }
        );
      },
-    getUserByUserId: (suid,callBack) => {
+     //Service for search bar for usernames
+    getUserByUsername: (userInfo,callBack) => {
        pool.query(
-         `select * from users where suid = ?`,
-         [suid],
+         `select * from users where username = ?`,
+         [userInfo.username],
          (error,results) => {
            if(error){
              return callBack(error);
@@ -80,7 +80,7 @@ module.exports = {
            }
        );
      },
-    updateUser: (data,callBack) => {
+    updateUser: (data,userInfo,callBack) => {
    
          pool.query(
            //data parameter
@@ -92,7 +92,7 @@ module.exports = {
                data.password,
                data.gender,
                data.age,
-               data.suid
+               userInfo.suid
              ],
              (error,results) => {
                // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
@@ -103,10 +103,10 @@ module.exports = {
              }
          );
      },
-    deleteUser: (suid, callBack) => {
+    deleteUser: (userInfo, callBack) => {
        pool.query(
          `delete from users where suid = ?`,
-         [suid],
+         [userInfo.suid],
          (error,results) => {
            // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
            if (error) {
