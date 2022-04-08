@@ -1,4 +1,4 @@
-const {createUser, createProfile, getUsers, getUserByUserId, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
+const {createUser, createProfile, getUsers, getUserByUsername, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
 
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
@@ -80,9 +80,10 @@ module.exports = {
       }
     });
   },
-  getUserByUserId: (req,res) => {
-    const id = req.params.suid;
-    getUserByUserId(id, (err, results) => {
+  getUserByUsername: (req,res) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    getUserByUsername(decoded.result, (err, results) => {
       //If there is an error, console.log that error and return nothing
       if(err) {
         return;
@@ -91,7 +92,7 @@ module.exports = {
       if(!results) {
         return res.status(500).json({
           success: 0,
-          message: 'No record was found with that ID'
+          message: 'No record was found with that username'
         });
       }
       //If success, return user information
@@ -123,7 +124,9 @@ module.exports = {
     const body = req.body;
     const salt = genSaltSync(10);
     body.password = hashSync(body.password, salt); //Encrypting the password
-    updateUser(body, (err,results) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    updateUser(body, decoded.result, (err,results) => {
       if(err){
         console.log(err);
       }
@@ -140,8 +143,9 @@ module.exports = {
     });
   },
   deleteUser: (req, res) => {
-      const id = req.params.suid;
-      deleteUser(id, (err, results) => {
+      const token = req.cookies.authorization;
+      const decoded = jwtDecode(token);
+      deleteUser(decoded.result, (err, results) => {
         //If there is an error, console.log that error and return nothing
         if(err) {
           console.log(err);

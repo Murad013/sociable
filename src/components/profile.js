@@ -1,13 +1,13 @@
 import Axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 
 function Profile() {
-     const navigate = useNavigate();
+     //const navigate = useNavigate();
      const [body, setBody] = useState('');
      const [bio, setBio] = useState('');
-     const [pfp, setPfp] = useState([]);
+     const [pfp, setPfp] = useState('');
      const [posts, setPosts] = useState([]);
 
      const createProfile = () => {
@@ -16,8 +16,9 @@ function Profile() {
       pfp: pfp},
      {withCredentials:true}
      ).then(() => {
-         swal(`Success!`,"Welcome To Sociable!", "success");
-         navigate('/home', { replace: true });
+         swal(`Success!`,"Thank You For Your Input!", "success");
+         setBio('');
+         setPfp('');
      }).catch(() => {
        swal(`Sorry...`, "Invalid Request", "error");
      });
@@ -56,22 +57,18 @@ function Profile() {
     }, []);
    return (
         
-     <div className = "profilePage" style={{textAlign: 'center'}}>
-          <h3>Bio</h3>
-          <input type = "text" placeholder='Tell Us Something Fun About Yourself' name = "bio" onChange ={(e) => {
-          setBio(e.target.value);
-          }}/>
-          <br></br>
-          <input type = "file" placeholder='Profile Pic' name = "image" onChange ={(e) => {
-          setPfp(e.target.value);
-          }}/>
-          <br></br>
-          <button onClick={createProfile}>Submit!</button>
-          <div className='postForm'>
-                        <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
-                        <br></br>
-                        <br></br>
-                        <button onClick={post}>Post</button>
+          <div className = "profilePage" style={{textAlign: 'center'}}>
+                <h3>Bio</h3>
+                <input type = "text" placeholder='Tell Us Something Fun About Yourself' name = "bio" onChange ={(e) => {setBio(e.target.value);}}/>
+                <br></br>
+                <input type = "file" placeholder='Profile Pic' name = "image" onChange ={(e) => {setPfp(e.target.value);}}/>
+                <br></br>
+                <button onClick={createProfile}>Submit!</button>
+                <div className='postForm'>
+                              <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                              <br></br>
+                              <br></br>
+                              <button onClick={post}>Post</button>
           </div>
 
 
