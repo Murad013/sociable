@@ -20,6 +20,9 @@ const Navbar = () => {
                     <NavLink to = "/">
                          SignUp
                     </NavLink>
+                    <NavLink to = "/home">
+                         Home
+                    </NavLink>
                     <NavLink to = "/about">
                          About
                     </NavLink>
@@ -28,6 +31,9 @@ const Navbar = () => {
                     </NavLink>
                     <NavLink to = "/userProfile">
                          Profile
+                    </NavLink>
+                    <NavLink to = "/login">
+                         Logout
                     </NavLink>
                </NavMenu>
                <NavBtn>

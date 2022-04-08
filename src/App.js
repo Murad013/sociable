@@ -8,6 +8,7 @@ import Home from "./components/home";
 import About from './pages/about';
 import Contact from './pages/contact';
 import Profile from "./components/profile";
+import Logout from "./components/logout";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
               <Route exact path="/" element={<SignUp />} />
               <Route exact path='/userProfile' element={<Profile />} />
               <Route exact path="/login" element={<Login />} />
+              <Route exact path="/logout" element={<Logout/>} />
               <Route path="/home" element={<Home />} />
               <Route path='/about' element={<About/>} />
               <Route path='/contact' element={<Contact/>} />
