@@ -22,8 +22,9 @@ module.exports = {
     });
   },
   getPostsByUserID: (req,res) => {
-    const id = req.params.suid;
-    getPostsByUserID(id, (err, results) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    getPostsByUserID(decoded.result, (err, results) => {
       //If there is an error, console.log that error and return nothing
       if(err) {
         console.log(err);
@@ -63,8 +64,9 @@ module.exports = {
     });
   },
   updatePost: (req,res) => {
-    const body = req.body;
-    updatePost(body, (err,results) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    updatePost(decoded.result, req.body, (err,results) => {
       if(err){
         console.log(err);
       }
