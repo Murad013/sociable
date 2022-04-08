@@ -31,10 +31,10 @@ module.exports = {
        );
      },
      //Profile Page
-    getPostsByUserID: (suid,callBack) => {
+    getPostsByUserID: (userInfo,callBack) => {
        pool.query(
-         `select * from posts where suid = ?`,
-         [suid],
+         `select * from posts where suid = ? ORDER BY time_created DESC;`,
+         [userInfo.suid],
          (error,results) => {
            if(error){
              return callBack(error);
@@ -43,14 +43,13 @@ module.exports = {
            }
        );
      },
-    updatePost: (data,callBack) => {
-   
+    updatePost: (userInfo,data,callBack) => {
          pool.query(
            //data parameter
            `update posts set body = ? where suid = ? and pid = ?`,
              [
                data.body,
-               data.suid,
+               userInfo.suid,
                data.pid
              ],
              (error,results) => {
