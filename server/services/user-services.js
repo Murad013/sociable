@@ -96,7 +96,7 @@ module.exports = {
     // Service for search bar for usernames
     getUserByUsername: (userInfo,callBack) => {
        pool.query(
-         `select * from users where username = ?`,
+         `select username from users where username = ?`,
          [userInfo.username],
          (error,results) => {
            if(error){

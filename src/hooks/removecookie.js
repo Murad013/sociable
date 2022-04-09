@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 
-const RemoveCookie = (cookiename) => {
-     return Cookies.remove(cookiename);
+const RemoveCookie = (cookieName) => {
+     return Cookies.remove(cookieName);
 };
 
 export default RemoveCookie;

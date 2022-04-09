@@ -1,19 +1,26 @@
-import React from 'react';
-import {
-     Nav,
-     NavLink,
-     Bars,
-     NavMenu,
-     NavBtn,
-     NavBtnLink
-   } from './navbarElements'
+import React, { useEffect, useState } from 'react';
+import {Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink} from './navbarElements'
+import Cookies from 'universal-cookie';
+import { useNavigate } from "react-router-dom";
+
+function logout () {
+     const cookies = new Cookies();
+     cookies.remove('token');
+} 
 
 const Navbar = () => {
+
+     const [cookie, setCookie] = useState('')
+     
+     useEffect(() => {
+          const cookies = new Cookies();
+          setCookie(cookies.get('token'))
+     },[]);
+
      return (
           <>
           <Nav>
                <NavLink to = '/'>
-                    
                     <h1>Sociable</h1>
                </NavLink>
                <Bars />
@@ -33,13 +40,16 @@ const Navbar = () => {
                     <NavLink to = "/userProfile">
                          Profile
                     </NavLink>
-                    <NavLink to = "/login">
+                    <NavLink onClick={logout} to = "/login">
                          Logout
                     </NavLink>
                </NavMenu>
-               <NavBtn>
-                    <NavBtnLink to='/login'>Login</NavBtnLink>
-               </NavBtn>
+               {cookie ? 
+                         ''
+                         : <NavBtn>
+                              <NavBtnLink to='/login'>Login</NavBtnLink>
+                         </NavBtn>}
+
           </Nav>
           </>
      );
