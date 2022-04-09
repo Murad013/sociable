@@ -104,27 +104,59 @@ function Profile() {
         getProfileInfo();
     }, []);
 
+    const openModalButtons = document.querySelectorAll('[data-modal-target]');
+    const closeModalButtons = document.querySelectorAll('[data-close-button]');
+    const overlay = document.getElementById('overlay');
+
+    openModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = document.querySelector(button.dataset.modalTarget);
+        openModal(modal);
+      })
+    });
+
+    closeModalButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const modal = button.closest('.modal');
+        closeModal(modal);
+      })
+    });
+    
+    if(overlay)
+    {overlay.addEventListener('click', () => {
+      const modals = document.querySelectorAll('.modal.active');
+      modals.forEach(modal => {
+        closeModal(modal);
+      })
+    });}
+
+    function openModal(modal) {
+      if (modal == null) return
+
+      modal.classList.add('active');
+      overlay.classList.add('active');
+    }
+    function closeModal(modal) {
+      if (modal == null) return
+
+      modal.classList.remove('active');
+      overlay.classList.remove('active');
+    }
 
    return (
           <div className = "profilePage" style={{textAlign: 'center'}}>
-                <div className='addingProfileInfo'  style={{textAlign: 'center'}}>
-                  <button>Add Profile Information</button>
-                  <div className='modal' id='modal'>
+                  <button data-modal-target="#modal">Add Profile Information</button>
+                  <div className='modal active' id='modal'>
                     <div className='modal-header'>
-                      <div className='title'>
-                        Profile Setup
-                      </div>
-                      <button className='close-button'>&times;</button>
+                      <div className='title'>Profile Setup</div>
+                      <button data-close-button className='close-button'>&times;</button>
                     </div>
                     <div className='modal-body'>
-                      <div className='modal-body-profile-form'>
                         <h3>Bio</h3>
                         <input type = "text" placeholder='Tell Us Something Fun' name = "bio" onChange ={(e) => {setBio(e.target.value);}}/>
-                      </div>
                     </div>
                   </div>
                   <div id='overlay'></div>
-                </div>
                 <div className='editingProfileInfo'>
                     <input type = "text" placeholder='Tell Us Something Fun' name = "bio" onChange ={(e) => {setBio(e.target.value);}}/>
                     <br></br>
@@ -138,9 +170,9 @@ function Profile() {
                 </div>
                 {/*profile information*/}
                 <ul>
-                    {profile?.map((t) => {
+                    {profile?.map((b) => {
                         return (
-                          <li style={{
+                          <li key = {b} style={{
                           display: 'inline-block',
                           background: '#256ce1',
                           color: 'white',
@@ -150,16 +182,16 @@ function Profile() {
                           margin: '10px 10px 0 0',
                           overflow: 'hidden',
                           width: '50%'}}>
-                          <b>Bio: {t.bio}</b>
+                          <b>Bio: {b.bio}</b>
                           <br></br>
                           </li>)
                     })}
                 </ul>
                 {/*user information*/}
                 <ul>
-                    {users?.map((t) => {
+                    {users?.map((u) => {
                         return (
-                          <li style={{
+                          <li key = {u} style={{
                           display: 'inline-block',
                           background: '#256ce1',
                           color: 'white',
@@ -169,22 +201,20 @@ function Profile() {
                           margin: '10px 10px 0 0',
                           overflow: 'hidden',
                           width: '50%'}}>
-                          <b>First Name: {t.firstname}</b>
+                          <b>Name: {u.firstname} {u.lastname}</b>
                           <br></br>
-                          <b>Last Name: {t.lastname}</b>
+                          <b>Age: {u.age}</b>
                           <br></br>
-                          <b>Age: {t.age}</b>
-                          <br></br>
-                          <b>Gender: {t.gender}</b>
+                          <b>Gender: {u.gender}</b>
                           <br></br>
                           </li>)
                     })}
                 </ul>
                 {/*posts information*/}
                 <ul>
-                    {posts?.map((t) => {
+                    {posts?.map((p) => {
                       return (
-                        <li style={{
+                        <li key = {p} style={{
                         display: 'inline-block',
                         background: '#256ce1',
                         color: 'white',
@@ -194,10 +224,10 @@ function Profile() {
                         margin: '10px 10px 0 0',
                         overflow: 'hidden',
                         width: '50%'}}>
-                        <b>{t.username}</b>
+                        <b>{p.username}</b>
                         <br></br>
-                        {t.body}<br></br>
-                        {t.time_created}
+                        {p.body}<br></br>
+                        {p.time_created}
                         </li>)
                     })}
                 </ul>
