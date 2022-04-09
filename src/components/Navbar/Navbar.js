@@ -13,6 +13,7 @@ const Navbar = () => {
           <>
           <Nav>
                <NavLink to = '/'>
+                    
                     <h1>Sociable</h1>
                </NavLink>
                <Bars />
