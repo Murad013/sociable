@@ -1,4 +1,4 @@
-const {createUser, createProfile, getUsers, getUserByUsername, getUserByUserID, getProfileInfo, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
+const {createUser, createProfile, getUsers, getUserByUsername, getUserByUserID, getProfileInfo, updateProfileInfo, updateUser, deleteUser, getUserByEmail} = require('../services/user-services');
 
 //Importing methods used from bcrypt package for encrypting passwords
 const {genSaltSync,hashSync,compareSync} = require('bcryptjs'); 
@@ -27,7 +27,7 @@ module.exports = {
       });
     });
   },
-  createProfile: (req,res) => {
+  createProfile: (req, res) => {
     let token = req.cookies.authorization;
     const decoded = jwtDecode(token);
     createProfile(decoded.result, req.body, (err,results) => {
@@ -43,6 +43,25 @@ module.exports = {
       return res.status(200).json({
         success: 1,
         data: results
+      });
+    });
+  },
+  updateProfileInfo: (req, res) => {
+    const token = req.cookies.authorization;
+    const decoded = jwtDecode(token);
+    updateProfileInfo(decoded.result, req.body, (err,results) => {
+      if(err){
+        console.log(err);
+      }
+      if(!results){
+        return res.json({
+          success: 0,
+          message: 'Failed to update'
+        });
+      }
+      return res.json({
+        success: 1,
+        message: "Updated successfully"
       });
     });
   },
@@ -80,7 +99,7 @@ module.exports = {
       }
     });
   },
-  getUserByUsername: (req,res) => {
+  getUserByUsername: (req, res) => {
     const token = req.cookies.authorization;
     const decoded = jwtDecode(token);
     getUserByUsername(decoded.result, (err, results) => {
@@ -120,7 +139,7 @@ module.exports = {
       });
     });
   },
-  getUserByUserID: (req,res) => {
+  getUserByUserID: (req, res) => {
     const token = req.cookies.authorization;
     const decoded = jwtDecode(token);
     getUserByUserID(decoded.result, (err, results) => {
@@ -143,7 +162,7 @@ module.exports = {
       });
     });
   },
-  getProfileInfo: (req,res) => {
+  getProfileInfo: (req, res) => {
     const token = req.cookies.authorization;
     const decoded = jwtDecode(token);
     getProfileInfo(decoded.result, (err, results) => {
@@ -166,7 +185,7 @@ module.exports = {
       });
     });
   },
-  updateUser: (req,res) => {
+  updateUser: (req, res) => {
     const body = req.body;
     const salt = genSaltSync(10);
     body.password = hashSync(body.password, salt); //Encrypting the password
@@ -212,5 +231,5 @@ module.exports = {
         });
       }
       });
-    }
+  }
 };
