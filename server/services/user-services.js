@@ -67,7 +67,7 @@ module.exports = {
         }
       );
     },
-    // Get all users service
+    // Get all users service (initial search bar dropdown before any search?)
     getUsers: callBack => {
        pool.query(
          `select * from users`,
@@ -80,7 +80,7 @@ module.exports = {
            }
        );
     },
-    // Service for getting user by user ID
+    // Service for getting user by user ID. Good for getting user information for profile page.
     getUserByUserID: (userInfo,callBack) => {
       pool.query(
         `select * from users where suid = ?`,

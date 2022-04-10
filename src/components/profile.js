@@ -13,7 +13,6 @@ function Profile() {
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
     //const [pfp, setPfp] = useState([]);
-    const [cookie, setCookie] = useState('');
 
     
     // const addProfileInfo = () => {
