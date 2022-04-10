@@ -14,6 +14,7 @@ router.patch('/', updateUser); //Protected
 router.patch('/profile', updateProfileInfo);
 router.delete('/:suid', deleteUser); //Protected
 router.post('/login',login); //Public
+
 router.get('/logout', (req, res) => {
      res.clearCookie('authorization');
      return res.redirect('/login');
