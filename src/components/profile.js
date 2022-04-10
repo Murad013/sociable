@@ -2,7 +2,6 @@ import Axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import swal from 'sweetalert';
 import '../styles/profile.css';
-import Cookies from 'universal-cookie';
 //import { useNavigate } from 'react-router-dom';
 
 function Profile() {

@@ -1,6 +1,5 @@
 import Axios from 'axios';
 import React, {useState} from 'react';
-//import {Form} from 'antd;'
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
