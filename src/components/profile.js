@@ -2,6 +2,7 @@ import Axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import swal from 'sweetalert';
 import '../styles/profile.css';
+import Cookies from 'universal-cookie';
 //import { useNavigate } from 'react-router-dom';
 
 function Profile() {
@@ -11,28 +12,29 @@ function Profile() {
     const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
-    const [pfp, setPfp] = useState([]);
+    //const [pfp, setPfp] = useState([]);
     const [cookie, setCookie] = useState('');
+
     
-    const addProfileInfo = () => {
-     Axios.post('http://localhost:3001/api/users/profile', 
-     {bio: bio,
-      pfp: pfp},
-     { 
-     method: 'POST',
-     mode: 'no-cors',
-     headers: {
-       'Access-Control-Allow-Origin': '*',
-       'Content-Type': 'application/json',
-     },
-     withCredentials: true}
-     ).then(() => {
-         swal(`Success!`,"Thank You For Your Input!", "success");
-         setBio('');
-     }).catch(() => {
-        swal(`Sorry...`, "Invalid Request", "error");
-     });
-    }
+    // const addProfileInfo = () => {
+    //  Axios.post('http://localhost:3001/api/users/profile', 
+    //  {bio: bio,
+    //   pfp: pfp},
+    //  { 
+    //  method: 'POST',
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Access-Control-Allow-Origin': '*',
+    //    'Content-Type': 'application/json',
+    //  },
+    //  withCredentials: true}
+    //  ).then(() => {
+    //      swal(`Success!`,"Thank You For Your Input!", "success");
+    //      setBio('');
+    //  }).catch(() => {
+    //     swal(`Sorry...`, "Invalid Request", "error");
+    //  });
+    // }
     const editProfileInfo = () => {
       Axios.patch('http://localhost:3001/api/users/profile', 
       {bio: bio},
@@ -83,7 +85,9 @@ function Profile() {
         })
         .then((json) => {
           setUser(json.data.data);
-        });
+        }).catch((err) => {
+          console.log('getUserByUserId',err);
+        });;
     }
     const getPostsByUserId = () => {
         Axios.get("http://localhost:3001/api/posts/:suid", 
@@ -98,7 +102,9 @@ function Profile() {
         })
         .then((json) => {
           setPosts(json.data.data);
-        });
+        }).catch((err) => {
+          console.log('getPostsByUserId', err);
+        });;
     }
     useEffect(() => {
         getPostsByUserId();
