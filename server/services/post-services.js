@@ -43,13 +43,13 @@ module.exports = {
            }
        );
      },
-    updatePost: (userInfo,data,callBack) => {
+    updatePost: (postInfo,data,callBack) => {
          pool.query(
            //data parameter
            `update posts set body = ? where suid = ? and pid = ?`,
              [
                data.body,
-               userInfo.suid,
+               postInfo.suid,
                data.pid
              ],
              (error,results) => {
@@ -61,10 +61,11 @@ module.exports = {
              }
          );
      },
-    deletePost: (pid, callBack) => {
+     // Going to be tough figuring out where to get the PID from dynamically
+    deletePost: (postInfo, callBack) => {
        pool.query(
          `delete from posts where pid = ?`,
-         [pid],
+         [postInfo.pid],
          (error,results) => {
            // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
            if (error) {

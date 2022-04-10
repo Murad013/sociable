@@ -83,7 +83,7 @@ module.exports = {
     });
   },
   deletePost: (req, res) => {
-      const id = req.params.pid;
+      const id = req.params;
       deletePost(id, (err, results) => {
         //If there is an error, console.log that error and return nothing
         if(err) {
@@ -105,5 +105,5 @@ module.exports = {
         });
       }
       });
-    }
+  }
 };

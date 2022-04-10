@@ -4,6 +4,7 @@ import React, {useState} from 'react';
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
 
 function Login() {
      const navigate = useNavigate();
@@ -17,7 +18,9 @@ function Login() {
             password: password
           }, {
             withCredentials: true
-          }).then(() => {
+          }).then((data) => {
+            const cookies = new Cookies();
+            cookies.set('token',data.data.token);
             swal(`Success!`,"Welcome Back!", "success");
             navigate('/home', { replace: true })
           }).catch(() => {

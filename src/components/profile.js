@@ -2,36 +2,39 @@ import Axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import swal from 'sweetalert';
 import '../styles/profile.css';
+import Cookies from 'universal-cookie';
 //import { useNavigate } from 'react-router-dom';
 
 function Profile() {
     //const navigate = useNavigate();
+    const [profile, setProfile] = useState([]);
+    const [users, setUser] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
-    const [pfp, setPfp] = useState([]);
-    const [posts, setPosts] = useState([]);
-    const [users, setUser] = useState([]);
-    const [profile, setProfile] = useState([]);
+    //const [pfp, setPfp] = useState([]);
+    const [cookie, setCookie] = useState('');
 
-    const addProfileInfo = () => {
-     Axios.post('http://localhost:3001/api/users/profile', 
-     {bio: bio,
-      pfp: pfp},
-     { 
-     method: 'POST',
-     mode: 'no-cors',
-     headers: {
-       'Access-Control-Allow-Origin': '*',
-       'Content-Type': 'application/json',
-     },
-     withCredentials: true}
-     ).then(() => {
-         swal(`Success!`,"Thank You For Your Input!", "success");
-         setBio('');
-     }).catch(() => {
-        swal(`Sorry...`, "Invalid Request", "error");
-     });
-   }
+    
+    // const addProfileInfo = () => {
+    //  Axios.post('http://localhost:3001/api/users/profile', 
+    //  {bio: bio,
+    //   pfp: pfp},
+    //  { 
+    //  method: 'POST',
+    //  mode: 'no-cors',
+    //  headers: {
+    //    'Access-Control-Allow-Origin': '*',
+    //    'Content-Type': 'application/json',
+    //  },
+    //  withCredentials: true}
+    //  ).then(() => {
+    //      swal(`Success!`,"Thank You For Your Input!", "success");
+    //      setBio('');
+    //  }).catch(() => {
+    //     swal(`Sorry...`, "Invalid Request", "error");
+    //  });
+    // }
     const editProfileInfo = () => {
       Axios.patch('http://localhost:3001/api/users/profile', 
       {bio: bio},
@@ -46,6 +49,7 @@ function Profile() {
       ).then(() => {
           swal(`Success!`,"Profile Updated!", "success");
           setBio('');
+          getProfileInfo();
       }).catch(() => {
           swal(`Sorry...`, "Invalid Request", "error");
       });
@@ -61,7 +65,7 @@ function Profile() {
         }).catch(() => {
           swal("Error", "Could Not Post", "error");
         });
-      }
+    }
     //To get profile bio and profile picture
     const getProfileInfo = () => {
         Axios.get("http://localhost:3001/api/users/userProfile/:username", 
@@ -71,7 +75,7 @@ function Profile() {
         .then((json) => {
           setProfile(json.data.data);
         });
-      }
+    }
 
     //To get user's firstname or any other information to display on their profile
     const getUserByUserId = () => {
@@ -81,8 +85,10 @@ function Profile() {
         })
         .then((json) => {
           setUser(json.data.data);
-        });
-      }
+        }).catch((err) => {
+          console.log('getUserByUserId',err);
+        });;
+    }
     const getPostsByUserId = () => {
         Axios.get("http://localhost:3001/api/posts/:suid", 
         {
@@ -96,8 +102,10 @@ function Profile() {
         })
         .then((json) => {
           setPosts(json.data.data);
-        });
-      }
+        }).catch((err) => {
+          console.log('getPostsByUserId', err);
+        });;
+    }
     useEffect(() => {
         getPostsByUserId();
         getUserByUserId();
@@ -131,10 +139,12 @@ function Profile() {
     });}
 
     function openModal(modal) {
-      if (modal == null) return
-
-      modal.classList.add('active');
-      overlay.classList.add('active');
+      if (modal == null) 
+          return;
+      else{
+        modal.classList.add('active');
+        overlay.classList.add('active');
+      }
     }
     function closeModal(modal) {
       if (modal == null) return
@@ -146,22 +156,23 @@ function Profile() {
    return (
           <div className = "profilePage" style={{textAlign: 'center'}}>
                   <button data-modal-target="#modal">Add Profile Information</button>
-                  <div className='modal active' id='modal'>
+                <div className='modal active' id='modal'>
                     <div className='modal-header'>
                       <div className='title'>Profile Setup</div>
                       <button data-close-button className='close-button'>&times;</button>
                     </div>
                     <div className='modal-body'>
-                        <h3>Bio</h3>
-                        <input type = "text" placeholder='Tell Us Something Fun' name = "bio" onChange ={(e) => {setBio(e.target.value);}}/>
+                      <h3>Bio</h3>
+                      <input type = "text" placeholder='Bio' value={bio} name = "bioCreate" onChange ={(e) => {setBio(e.target.value);}}/>
+                      <button onClick={editProfileInfo}>Submit!</button>
                     </div>
-                  </div>
-                  <div id='overlay'></div>
-                <div className='editingProfileInfo'>
-                    <input type = "text" placeholder='Tell Us Something Fun' name = "bio" onChange ={(e) => {setBio(e.target.value);}}/>
-                    <br></br>
-                    <button onClick={editProfileInfo}>Submit!</button>
                 </div>
+                <div id='overlay'></div>
+                <div className='editingProfileInfo'>
+                      <input type = "text" placeholder='Bio' value = {bio} name = "bioChange" onChange ={(e) => {setBio(e.target.value);}}/>
+                      <br></br>
+                      <button onClick={editProfileInfo}>Submit!</button>
+                    </div>
                 <div className='postForm'>
                     <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                     <br></br>
