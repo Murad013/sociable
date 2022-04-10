@@ -6,13 +6,14 @@ import '../styles/profile.css';
 
 function Profile() {
     //const navigate = useNavigate();
+    const [profile, setProfile] = useState([]);
+    const [users, setUser] = useState([]);
+    const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
     const [pfp, setPfp] = useState([]);
-    const [posts, setPosts] = useState([]);
-    const [users, setUser] = useState([]);
-    const [profile, setProfile] = useState([]);
-
+    const [cookie, setCookie] = useState('');
+    
     const addProfileInfo = () => {
      Axios.post('http://localhost:3001/api/users/profile', 
      {bio: bio,
@@ -36,12 +37,12 @@ function Profile() {
       Axios.patch('http://localhost:3001/api/users/profile', 
       {bio: bio},
       { 
-        method: 'PATCH',
-        mode: 'no-cors',
-        headers: {
-          'Access-Control-Allow-Origin': '*',
-          'Content-Type': 'application/json',
-        },
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
       withCredentials: true}
       ).then(() => {
           swal(`Success!`,"Profile Updated!", "success");

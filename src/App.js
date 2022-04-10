@@ -12,23 +12,23 @@ import Profile from "./components/profile";
 
 
 function App() {
-
         return (
           <>
           <Router>
-          <Navbar/>
+            <div className="App">
+            <Navbar/>
             <Routes>
-              <Route path="/" element={<SignUp />} />
-              <Route path='/userProfile' element={<Profile />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/login" element={<Logout />} />
-              <Route path="/home" element={<Home />} />
-              <Route path='/about' element={<About/>} />
-              <Route path='/contact' element={<Contact/>} />
+                <Route path="/" element={<SignUp />} />
+                <Route path='/userProfile' element={<Profile />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Logout />} />
+                <Route path="/home" element={<Home />} />
+                <Route path='/about' element={<About/>} />
+                <Route path='/contact' element={<Contact/>} />
             </Routes>
+            </div>
           </Router>
           </>
-          
      );
 }
 

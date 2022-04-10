@@ -85,7 +85,7 @@ module.exports = {
           expiresIn: "1hr"
         });
         
-        // res.cookie('token', token, {httpOnly: true, sameSite: 'strict'});
+        //res.cookie('authorization', token, {httpOnly: true, sameSite: 'strict', expiresIn: 1000});
         return res.status(200).json({
           success: 1,
           message: "Successful Login!",

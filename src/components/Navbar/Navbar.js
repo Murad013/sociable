@@ -1,56 +1,73 @@
 import React, { useEffect, useState } from 'react';
 import {Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink} from './navbarElements'
 import Cookies from 'universal-cookie';
-import { useNavigate } from "react-router-dom";
-
-function logout () {
-     const cookies = new Cookies();
-     cookies.remove('token');
-} 
 
 const Navbar = () => {
 
-     const [cookie, setCookie] = useState('')
+     const [cookie, setCookie] = useState('');
+
+     function logout () {
+          const cookies = new Cookies();
+          cookies.remove('token');
+     } 
+
+     function createCookie() {
+          const cookies = new Cookies();
+          return setCookie(cookies.get('token'));
+     }
      
      useEffect(() => {
-          const cookies = new Cookies();
-          setCookie(cookies.get('token'))
-     },[]);
+          createCookie();
+     },[cookie]);
 
      return (
           <>
-          <Nav>
-               <NavLink to = '/'>
-                    <h1>Sociable</h1>
-               </NavLink>
-               <Bars />
-               <NavMenu>
-                    <NavLink to = "/">
-                         SignUp
-                    </NavLink>
-                    <NavLink to = "/home">
-                         Home
-                    </NavLink>
-                    <NavLink to = "/about">
-                         About
-                    </NavLink>
-                    <NavLink to = "/contact">
-                         Contact
-                    </NavLink>
-                    <NavLink to = "/userProfile">
-                         Profile
-                    </NavLink>
-                    <NavLink onClick={logout} to = "/login">
-                         Logout
-                    </NavLink>
-               </NavMenu>
-               {cookie ? 
-                         ''
-                         : <NavBtn>
-                              <NavBtnLink to='/login'>Login</NavBtnLink>
-                         </NavBtn>}
-
-          </Nav>
+          {cookie ? 
+                    <Nav>
+                         <NavLink to = '/home'>
+                              <h1>Sociable</h1>
+                         </NavLink>
+                         <Bars />
+                         <NavMenu>
+                              <NavLink to = "/home">
+                                   Home
+                              </NavLink>
+                              <NavLink to = "/about">
+                                   About
+                              </NavLink>
+                              <NavLink to = "/contact">
+                                   Contact
+                              </NavLink>
+                              <NavLink to = "/userProfile">
+                                   Profile
+                              </NavLink>
+                         </NavMenu>
+                         <NavBtn onClick={logout}>
+                              <NavBtnLink to='/login'>Logout</NavBtnLink>
+                         </NavBtn>
+                    </Nav>
+                    : 
+                    <Nav>
+                         <NavLink to = '/'>
+                              <h1>Sociable</h1>
+                         </NavLink>
+                         <Bars />
+                         <NavMenu>
+                              <NavLink to = "/">
+                                   SignUp
+                              </NavLink>
+                              <NavLink to = "/about">
+                                   About
+                              </NavLink>
+                              <NavLink to = "/contact">
+                                   Contact
+                              </NavLink>
+                         </NavMenu>
+                         <NavBtn>
+                         <NavBtnLink to='/login'>Login</NavBtnLink>
+                         </NavBtn>
+                    </Nav>
+          }
           </>
      );
 };

@@ -20,7 +20,6 @@ function Login() {
             withCredentials: true
           }).then((data) => {
             const cookies = new Cookies();
-            console.log(data)
             cookies.set('token',data.data.token);
             swal(`Success!`,"Welcome Back!", "success");
             navigate('/home', { replace: true })
