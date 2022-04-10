@@ -41,7 +41,7 @@ function Home() {
 
      return (
                <div className='Home' style={{textAlign: 'center'}}>
-                    <h1>Welcome!</h1>
+                    <h1>Home</h1>
                     <div className='postForm'>
                         <input type='text' placeholder='Something on your mind ?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <br></br>

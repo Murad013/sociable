@@ -153,6 +153,7 @@ function Profile() {
 
    return (
           <div className = "profilePage" style={{textAlign: 'center'}}>
+            <h1>Profile</h1>
                   <button data-modal-target="#modal">Add Profile Information</button>
                 <div className='modal active' id='modal'>
                     <div className='modal-header'>
