@@ -1,18 +1,17 @@
 import Axios from 'axios';
 import React, {useState} from 'react';
-//import {Form} from 'antd;'
 import swal from 'sweetalert';
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 
-function Login() {
+export default function Login() {
      const navigate = useNavigate();
      const [email, setEmail] = useState('');
      const [password, setPassword] = useState('');
 
 
-     const login = () => {
+     const loginFunction = () => {
           Axios.post('http://localhost:3001/api/users/login', {
             email: email,
             password: password
@@ -37,10 +36,8 @@ function Login() {
             <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
               setPassword(e.target.value);
             }}/>
-            <button onClick={login}>Log In!</button>
-            <Link to={"/"}>Go back to sign up.</Link>
+            <button onClick={loginFunction}>Log In!</button>
+            <Link to={"/"}>Create Account</Link>
         </div>
      )
 }
-
-export default Login;

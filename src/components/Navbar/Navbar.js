@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {Nav, NavLink, Bars, NavMenu, NavBtn, NavBtnLink} from './navbarElements'
+import {Nav, NavLink, Bars, NavMenu, NavBtn, LoginNavBtnLink, LogoutNavBtnLink} from './navbarElements'
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const Navbar = () => {
 
-     const [cookie, setCookie] = useState('');
+export default function Navbar() {
+
+     const [cookie, setCookie] = useState();
      const navigate = useNavigate();
 
      // Logout clears all cookies from frontend and from backend
@@ -30,7 +31,7 @@ const Navbar = () => {
      useEffect(() => {
           const cookies = new Cookies();
           setCookie(cookies.get('token'));
-     },[]);
+     },[cookie]);
 
      return (
           <>
@@ -55,10 +56,10 @@ const Navbar = () => {
                               </NavLink>
                          </NavMenu>
                          <NavBtn onClick={logout}>
-                              <NavBtnLink to='/login'>Logout</NavBtnLink>
+                              <LogoutNavBtnLink to='/login'>Logout</LogoutNavBtnLink>
                          </NavBtn>
                     </Nav>
-                    : 
+                    : // Above Navbar displays if cookie exists (logged in) Below NavBar displays if cookie doesn't exist (logged out)
                     <Nav>
                          <NavLink to = '/'>
                               <h1>Sociable</h1>
@@ -76,12 +77,10 @@ const Navbar = () => {
                               </NavLink>
                          </NavMenu>
                          <NavBtn>
-                         <NavBtnLink to='/login'>Login</NavBtnLink>
+                         <LoginNavBtnLink to='/login'>Login</LoginNavBtnLink>
                          </NavBtn>
                     </Nav>
           }
           </>
      );
-};
-
-export default Navbar;
+}
