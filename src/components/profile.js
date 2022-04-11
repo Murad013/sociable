@@ -8,7 +8,7 @@ import Cookies from 'universal-cookie';
 function Profile() {
     const navigate = useNavigate();
     const [profile, setProfile] = useState([]);
-    const [users, setUser] = useState([]);
+    const [user, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
@@ -174,8 +174,6 @@ function Profile() {
       Axios.get("http://localhost:3001/api/users/logout", 
       {
         withCredentials: true
-      }).then(() => {
-           navigate('/login', { replace: true })
       });
     }
 
@@ -274,7 +272,7 @@ function Profile() {
                 </ul>
                 {/*user information*/}
                 <ul>
-                    {users?.map((u) => {
+                    {user?.map((u) => {
                         return (
                           <li key = {u} style={{
                           display: 'inline-block',
