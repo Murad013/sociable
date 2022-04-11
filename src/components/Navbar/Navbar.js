@@ -3,7 +3,7 @@ import {Nav, NavLink, Bars, NavMenu, NavBtn, LoginNavBtnLink, LogoutNavBtnLink} 
 import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-const Navbar = () => {
+export default function Navbar() {
 
      const [cookie, setCookie] = useState();
      const navigate = useNavigate();
@@ -82,6 +82,4 @@ const Navbar = () => {
           }
           </>
      );
-};
-
-export default Navbar;
+}

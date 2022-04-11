@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-function SignUp() {
+export default function SignUp() {
   
      const navigate = useNavigate();
      const [firstname, setFirstName] = useState('');
@@ -64,5 +64,3 @@ function SignUp() {
         </div>
      )
 }
-
-export default SignUp;

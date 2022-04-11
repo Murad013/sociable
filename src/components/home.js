@@ -4,25 +4,48 @@ import {useState, useEffect} from 'react';
 import swal from 'sweetalert';
 import '../styles/App.css';
 
-function Home() {
+export default function Home() {
   const [body, setBody] = useState('');
   const [posts, setPosts] = useState([]);
 
   const createPost = () => {
-    Axios.post('http://localhost:3001/api/posts/post', {
+      Axios.post('http://localhost:3001/api/posts/post', {
       body: body
-    },
-    {withCredentials: true}
-    ).then(() => {
-      swal('Success', "Post Successful", "success");
-      setBody('');
-      getPosts();
-    }).catch(() => {
-      swal("Error", "Could Not Post", "error");
-    });
+      },
+      {withCredentials: true}
+      ).then(() => {
+        swal('Success', "Post Successful", "success");
+        setBody('');
+        getPosts();
+      }).catch(() => {
+        swal("Error", "Could Not Post", "error");
+      });
   }
+  // To edit post content
+  const editPost = () => {
+      Axios.patch('http://localhost:3001/api/posts/post/:pid', 
+      {body: body},
+      {withCredentials: true}
+      ).then(() => {
+        getPosts();
+      }).catch(() => {
+        swal("Error", "Could Not Edit", "error");
+      });
+  }
+  // To delete post
+  const deletePost = () => {
+      Axios.delete('http://localhost:3001/api/posts/post/:pid', 
+      {body: body},
+      {withCredentials: true}
+      ).then(() => {
+        getPosts();
+      }).catch(() => {
+        swal("Error", "Could Not Edit", "error");
+      });
+  }
+  // To get all posts regardless of user ID
   const getPosts = () => {
-    Axios.get("http://localhost:3001/api/posts", {
+      Axios.get("http://localhost:3001/api/posts", {
       method: 'GET',
       mode: 'no-cors',
       headers: {
@@ -30,14 +53,15 @@ function Home() {
         'Content-Type': 'application/json',
       },
       withCredentials: true
-    })
-    .then((json) => {
+      })
+      .then((json) => {
       setPosts(json.data.data);
-    });
+      });
   }
-    useEffect(() => {
+  // To render page when posts are made
+  useEffect(() => {
       getPosts();
-    }, []);
+  }, []);
 
      return (
                <div className='Home' style={{textAlign: 'center'}}>
@@ -72,4 +96,3 @@ function Home() {
           </div>
      )
 }
-export default Home;
