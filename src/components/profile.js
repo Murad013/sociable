@@ -2,18 +2,25 @@ import Axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import swal from 'sweetalert';
 import '../styles/profile.css';
+import Cookies from 'universal-cookie';
 //import { useNavigate } from 'react-router-dom';
 
 function Profile() {
-    //const navigate = useNavigate();
+    const navigate = useNavigate();
     const [profile, setProfile] = useState([]);
     const [users, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
+    const [firstname, setFirstName] = useState('');
+    const [lastname, setLastName] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [gender, setGender] = useState('');
+    const [age, setAge] = useState('');
     //const [pfp, setPfp] = useState([]);
 
-    
     // const addProfileInfo = () => {
     //  Axios.post('http://localhost:3001/api/users/profile', 
     //  {bio: bio,
@@ -33,11 +40,68 @@ function Profile() {
     //     swal(`Sorry...`, "Invalid Request", "error");
     //  });
     // }
+
+    // Edit User Information Form
+    const editUserInfo = () => {
+      Axios.patch('http://localhost:3001/api/users/',
+      { firstname: firstname,
+        lastname: lastname,
+        username: username,
+        email: email,
+        password: password,
+        gender: gender,
+        age: age
+      },
+      {
+        method: 'PATCH',
+        mode: 'no-cors',
+        headers: 
+        {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+        },
+        withCredentials: true}
+        ).then(() => {
+          swal(`Success!`,"User Information Updated!", "success");
+          setFirstName('');
+          setLastName('');
+          setUsername('');
+          setEmail('');
+          setPassword('');
+          setGender('');
+          setAge('');
+          getUserByUserId();
+      }).catch(() => {
+          swal(`Sorry...`, "Invalid Request", "error");
+      });
+    }
+    // Delete Account Function
+    const deleteAccount = () => {
+      Axios.delete('http://localhost:3001/api/users/:suid',
+      {method: 'DELETE',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true}
+      ).then(() => {
+        swal(`Sorry to see you go...`,"Account Deleted", "success");
+        clearCookie();
+        const cookies = new Cookies();
+        cookies.remove('token');
+        navigate('/', { replace: true });
+
+      }).catch(() => {
+        swal(`Error`, "Invalid Request", "error");
+      });
+    }
+    // Edit profile bio and/or profile picture
     const editProfileInfo = () => {
       Axios.patch('http://localhost:3001/api/users/profile', 
       {bio: bio},
       { 
-      method: 'POST',
+      method: 'PATCH',
       mode: 'no-cors',
       headers: {
         'Access-Control-Allow-Origin': '*',
@@ -52,7 +116,8 @@ function Profile() {
           swal(`Sorry...`, "Invalid Request", "error");
       });
     } 
-    const post = () => {
+    // Creating posts function
+    const createPost = () => {
         Axios.post('http://localhost:3001/api/posts/post', 
         {body: body},
         {withCredentials: true}
@@ -74,7 +139,6 @@ function Profile() {
           setProfile(json.data.data);
         });
     }
-
     //To get user's firstname or any other information to display on their profile
     const getUserByUserId = () => {
         Axios.get("http://localhost:3001/api/users/userID/:suid", 
@@ -87,6 +151,7 @@ function Profile() {
           console.log('getUserByUserId',err);
         });;
     }
+    // To only get posts for user logged in, (profile posts)
     const getPostsByUserId = () => {
         Axios.get("http://localhost:3001/api/posts/:suid", 
         {
@@ -104,6 +169,16 @@ function Profile() {
           console.log('getPostsByUserId', err);
         });;
     }
+    // Clear server cookie function
+    const clearCookie = () => {
+      Axios.get("http://localhost:3001/api/users/logout", 
+      {
+        withCredentials: true
+      }).then(() => {
+           navigate('/login', { replace: true })
+      });
+    }
+
     useEffect(() => {
         getPostsByUserId();
         getUserByUserId();
@@ -176,7 +251,7 @@ function Profile() {
                     <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                     <br></br>
                     <br></br>
-                    <button onClick={post}>Post</button>
+                    <button onClick={createPost}>Post</button>
                 </div>
                 {/*profile information*/}
                 <ul>

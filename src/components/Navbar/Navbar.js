@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
 
-     const [cookie, setCookie] = useState('');
+     const [cookie, setCookie] = useState();
      const navigate = useNavigate();
 
      // Logout clears all cookies from frontend and from backend
@@ -30,7 +30,7 @@ const Navbar = () => {
      useEffect(() => {
           const cookies = new Cookies();
           setCookie(cookies.get('token'));
-     },[]);
+     },[cookie]);
 
      return (
           <>

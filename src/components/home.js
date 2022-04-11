@@ -8,7 +8,7 @@ function Home() {
   const [body, setBody] = useState('');
   const [posts, setPosts] = useState([]);
 
-  const post = () => {
+  const createPost = () => {
     Axios.post('http://localhost:3001/api/posts/post', {
       body: body
     },
@@ -46,7 +46,7 @@ function Home() {
                         <input type='text' placeholder='Something on your mind ?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <br></br>
                         <br></br>
-                        <button onClick={post}>Post</button>
+                        <button onClick={createPost}>Post</button>
                     </div>
                     <ul>
                             {posts?.map((t) => {
