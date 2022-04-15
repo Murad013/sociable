@@ -73,8 +73,8 @@ export default function Home() {
                         <button onClick={createPost}>Post</button>
                     </div>
                     <ul>
-                            {posts?.map((t) => {
-                              return <li style={{
+                            {posts.map((post, i) => {
+                              return <li key = {i} style={{
                                 display: 'inline-block',
                                 background: '#256ce1',
                                 color: 'white',
@@ -85,10 +85,10 @@ export default function Home() {
                                 overflow: 'hidden',
                                 width: '50%'
                               }}>
-                                <b>{t.username}</b>
+                                <b>{post?.username}</b>
                                 <br></br>
-                                {t.body}<br></br>
-                                {t.time_created}
+                                {post?.body}<br></br>
+                                {post?.time_created}
                                 </li>
                             }
                             )}

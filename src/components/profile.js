@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Profile() {
     const navigate = useNavigate();
     const [profile, setProfile] = useState([]);
-    const [user, setUser] = useState([]);
+    const [users, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
     const [bio, setBio] = useState('');
@@ -221,9 +221,9 @@ export default function Profile() {
                 </div>
                 {/*profile information*/}
                 <ul>
-                    {profile?.map((b) => {
+                    {profile.map((profile, p) => {
                         return (
-                          <li key = {b} style={{
+                          <li key = {p} style={{
                           display: 'inline-block',
                           background: '#256ce1',
                           color: 'white',
@@ -233,14 +233,14 @@ export default function Profile() {
                           margin: '10px 10px 0 0',
                           overflow: 'hidden',
                           width: '50%'}}>
-                          <b>Bio: {b.bio}</b>
+                          <b>Bio: {profile?.bio}</b>
                           <br></br>
                           </li>)
                     })}
                 </ul>
                 {/*user information*/}
                 <ul>
-                    {user?.map((u) => {
+                    {users.map((user, u) => {
                         return (
                           <li key = {u} style={{
                               display: 'inline-block',
@@ -252,18 +252,18 @@ export default function Profile() {
                               margin: '10px 10px 0 0',
                               overflow: 'hidden',
                               width: '50%'}}>
-                          <b>Name: {u.firstname} {u.lastname}</b>
+                          <b>Name: {user?.firstname} {user?.lastname}</b>
                           <br></br>
-                          <b>Age: {u.age}</b>
+                          <b>Age: {user?.age}</b>
                           <br></br>
-                          <b>Gender: {u.gender}</b>
+                          <b>Gender: {user?.gender}</b>
                           <br></br>
                           </li>)
                     })}
                 </ul>
                 {/*posts information*/}
                 <ul>
-                    {posts?.map((p) => {
+                    {posts.map((post, p) => {
                       return (
                         <li key = {p} style={{
                             display: 'inline-block',
@@ -275,11 +275,11 @@ export default function Profile() {
                             margin: '10px 10px 0 0',
                             overflow: 'hidden',
                             width: '50%'}}>
-                        <b>{p.username}</b>
+                        <b>{post?.username}</b>
                         <br></br>
-                        {p.body}
+                        {post?.body}
                         <br></br>
-                        {p.time_created}
+                        {post?.time_created}
                         </li>)
                     })}
                 </ul>
