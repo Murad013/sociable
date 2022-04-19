@@ -81,9 +81,11 @@ module.exports = {
       const match = compareSync(body.password, results.password); //compares password inputted by user to hashed password stored in database and returns true or false
       if (match) {
         results.password = undefined;
-        const token = sign({result: results}, process.env.KEY, {
-          expiresIn: "1hr"
-        });
+        const token = sign({result: results}, process.env.KEY, {expiresIn: "1h"});
+        // const accessToken = sign({result: results}, process.env.KEY, {expiresIn: "30s"}
+        // );
+        // const refreshToken = sign({result: results}, process.env.KEY, {expiresIn: "1d"}
+        // );
         
         res.cookie('authorization', token, {httpOnly: true, sameSite: 'strict', expiresIn: 1000});
         return res.status(200).json({
