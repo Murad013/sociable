@@ -52,9 +52,19 @@ export default function SignUp() {
             <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
               setPassword(e.target.value);
             }}/>
-            <input type = "text" placeholder='Gender' name = "gender" onChange ={(e) => {
+
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" onChange ={(e) => {
               setGender(e.target.value);
-            }}/>
+            }}>
+              <optgroup label="Gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </optgroup>
+            </select>
+
+            
             <input type = "text" placeholder='Age' name = "age" onChange ={(e) => {
               setAge(e.target.value);
             }}/>

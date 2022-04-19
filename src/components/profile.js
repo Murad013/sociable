@@ -193,7 +193,6 @@ export default function Profile() {
           getPostsByUserId();
         }).catch(() => {
           swal("Error", "Could Not Delete", "error");
-          console.log('did not delete');
         });
     }
     // To only get posts for user logged in, (profile posts)
