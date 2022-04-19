@@ -10,7 +10,6 @@ export default function Navbar() {
      const navigate = useNavigate();
 
      // Logout clears all cookies from frontend and from backend
-     // Side note: Frontend cookie is for NavBar change while Backend cookie is for resources.
      function logout () {
           clearCookie();
           const cookies = new Cookies();
