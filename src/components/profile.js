@@ -21,6 +21,7 @@ export default function Profile() {
     const [age, setAge] = useState('');
     const [pfp, setPfp] = useState([]);
     const [isEditing, setIsEditing] = useState();
+    const [isEdited, setIsEdited] = useState(false);
 
     const addProfileInfo = () => {
         Axios.post('http://localhost:3001/api/users/profile', 
@@ -157,17 +158,19 @@ export default function Profile() {
         return swal("Error", "Please Enter Something", "error");
       }
   }
-  // To edit post content
+  // To set isEditing state to true
     const editPost = (post) => {
       setIsEditing(post);
     }
-    
+    // To save edited changes of post
     const savePost = (pid) => {
         Axios.patch(`http://localhost:3001/api/posts/${pid}`,
         {body: updatedBody},
         {withCredentials: true}
         ).then(()=> {
+          swal('Success', "Updated Successfully", "success");
           setIsEditing({});
+          setIsEdited(true);
           getPostsByUserId();
         }).catch(() => {
         swal("Error", "Could Not Edit", "error");
@@ -186,6 +189,7 @@ export default function Profile() {
           },
           withCredentials: true}
         ).then(() => {
+          swal('Success', "Deleted Successfully", "success");
           getPostsByUserId();
         }).catch(() => {
           swal("Error", "Could Not Delete", "error");
@@ -227,8 +231,7 @@ export default function Profile() {
 
     const handleKeyDown = (e) => {
       if (e.keyCode === 13) {
-        createPost();
-        e.preventDefault();      
+        createPost();    
       }
     }
 
@@ -309,23 +312,29 @@ export default function Profile() {
                         {isEditing?.pid === post.pid ? (
                           <input
                             name="editPost"
+                            onKeyDown={handleKeyDown}
                             type="text"
                             placeholder="Edit Post"
-                            onChange ={(e) => {setUpdatedBody(e.target.value);}
-                            
-                          }
+                            onChange ={(e) => {setUpdatedBody(e.target.value);}}
                           />
+                          
+
                         ) : (
                         post.body )}
 
 
                         <br/>
-                        {post?.time_updated ? post.time_updated : post.time_created}
+                        {
+                        post.time_updated ? 
+                        post.time_updated 
+                        : 
+                        post.time_created}
                         <br></br>
                         {isEditing?.pid === post.pid ? <div> 
                           <button onClick={() => savePost(post.pid)}>Save</button>
                           <button onClick={() => setIsEditing({})}>Cancel</button> 
-                        </div> : 
+                        </div> 
+                        : 
                         <div>
                           <button onClick={() => deletePost(post.pid)}>Delete</button>
                           <button onClick={() => editPost(post)}>Edit</button>
