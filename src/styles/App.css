@@ -1,12 +1,7 @@
 .App {
+  background-color: #1d3c4b;
   text-align: center;
-}
-.signUpForm, .loginForm{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 90vh;
+  color: white;
 }
 
 .form input{
@@ -22,4 +17,102 @@ ul {
 li {
   display: inline-block;
 }
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  margin: auto;
+}
+
+.left {
+  left: 0;
+  background-color: #1d3c4b;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-image:linear-gradient(47deg, rgba(224,211,167,0.8300362381280637) 0%, rgba(197,142,36,0.7964227927499125) 100%), 
+  url("C:\Users\annar\Desktop\SociableProject\sociable\images\background.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.signUpInput{
+  padding: 5 0 5 0;
+}
+
+.signUpInput input[type=text], input[type=password]{
+  border: none;
+  padding: 5 50 5 50;
+  border-radius: 10px;
+  background-color: #cbd4d8;
+}
+
+::placeholder{
+  color: #1d3c4b94;
+}
+
+.signUpForm h1{
+  padding-bottom: 10;
+}
+
+.signUp{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-family: "Oxygen";
+}
+
+.signUp button{
+  padding: 10 20 10 20;
+  margin-top: 15;
+  border: none;
+  background-color: #e7980fda;
+  border-radius: 10px;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 2px;
+  box-shadow:0 0 25px #17303c;
+}
+
+.signUp button:hover{
+  background-color: #ffb83eda;
+}
+
+.LogInReroute{
+  font-family: "Oxygen";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.LogInReroute h2{
+  margin-bottom: 35px;
+}
+
+.LogInReroute a{
+  padding: 10 50 10 50;
+  background-color: white;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bolder;
+  color: #1d3c4b;
+  letter-spacing: 2px;
+  box-shadow:0 0 25px #a77b2fda;
+}
+
+.LogInReroute a:hover{
+  background-color: #1d3c4b;
+  color: white;
+}
+
 
