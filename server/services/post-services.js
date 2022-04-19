@@ -43,14 +43,25 @@ module.exports = {
            }
        );
      },
-    updatePost: (postInfo,data,callBack) => {
+     getPostsByID: (data,callBack) => {
+      pool.query(
+        `select * from posts where pid = ?;`,
+        [data.pid],
+        (error,results) => {
+          if(error){
+            return callBack(error);
+          }
+          return callBack(null,results);  //result is returned in an array format so we must receive the first index only because we only want one user at a time
+          }
+      );
+    },
+    updatePost: (data,callBack) => {
          pool.query(
            //data parameter
-           `update posts set body = ? where suid = ? and pid = ?`,
+           `update posts set body = ? where pid = ?`,
              [
                data.body,
-               postInfo.suid,
-               data.pid
+               data.id.pid
              ],
              (error,results) => {
                // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
@@ -62,10 +73,10 @@ module.exports = {
          );
      },
      // Going to be tough figuring out where to get the PID from dynamically
-    deletePost: (postInfo, callBack) => {
+    deletePost: (data, callBack) => {
        pool.query(
          `delete from posts where pid = ?`,
-         [postInfo.pid],
+         [data.pid],
          (error,results) => {
            // error and results cannot be both valuable or null, if one is null the other is valuable and vice versa
            if (error) {

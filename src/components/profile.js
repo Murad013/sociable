@@ -10,6 +10,7 @@ export default function Profile() {
     const [users, setUser] = useState([]);
     const [posts, setPosts] = useState([]);
     const [body, setBody] = useState('');
+    const [updatedBody, setUpdatedBody] = useState('');
     const [bio, setBio] = useState('');
     const [firstname, setFirstName] = useState('');
     const [lastname, setLastName] = useState('');
@@ -19,6 +20,7 @@ export default function Profile() {
     const [gender, setGender] = useState('');
     const [age, setAge] = useState('');
     const [pfp, setPfp] = useState([]);
+    const [isEditing, setIsEditing] = useState();
 
     const addProfileInfo = () => {
         Axios.post('http://localhost:3001/api/users/profile', 
@@ -139,8 +141,9 @@ export default function Profile() {
     }
     // Creating posts function
     const createPost = () => {
+      if (body){
         Axios.post('http://localhost:3001/api/posts/post', 
-        {body: body},
+        {body},
         {withCredentials: true}
         ).then(() => {
           swal('Success', "Post Successful", "success");
@@ -149,28 +152,44 @@ export default function Profile() {
         }).catch(() => {
           swal("Error", "Could Not Post", "error");
         });
+      }
+      else{
+        return swal("Error", "Please Enter Something", "error");
+      }
   }
   // To edit post content
-    const editPost = () => {
-        Axios.patch('http://localhost:3001/api/posts/post/:pid', 
-        {body: body},
-        {withCredentials: true}
-        ).then(() => {
-          getPostsByUserId();
-        }).catch(() => {
-          swal("Error", "Could Not Edit", "error");
-        });
+    const editPost = (post) => {
+      setIsEditing(post);
     }
-  // To delete post
-    const deletePost = () => {
-        Axios.delete('http://localhost:3001/api/posts/post/:pid', 
-        {body: body},
+    
+    const savePost = (pid) => {
+        Axios.patch(`http://localhost:3001/api/posts/${pid}`,
+        {body: updatedBody},
         {withCredentials: true}
-        ).then(() => {
-          setBody('');
+        ).then(()=> {
+          setIsEditing({});
           getPostsByUserId();
         }).catch(() => {
-          swal("Error", "Could Not Edit", "error");
+        swal("Error", "Could Not Edit", "error");
+      });
+    }
+
+  // To delete post
+    const deletePost = (pid) => {
+        Axios.delete(`http://localhost:3001/api/posts/${pid}`, 
+        {
+          method: 'DELETE',
+          mode: 'no-cors',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+          },
+          withCredentials: true}
+        ).then(() => {
+          getPostsByUserId();
+        }).catch(() => {
+          swal("Error", "Could Not Delete", "error");
+          console.log('did not delete');
         });
     }
     // To only get posts for user logged in, (profile posts)
@@ -205,16 +224,24 @@ export default function Profile() {
         getProfileInfo();
     }, []);
 
+
+    const handleKeyDown = (e) => {
+      if (e.keyCode === 13) {
+        createPost();
+        e.preventDefault();      
+      }
+    }
+
    return (
           <div className = "profilePage" style={{textAlign: 'center'}}>
             <h1>Profile</h1>
                 <div className='editingProfileInfo'>
-                      <input type = "text" placeholder='Bio' value = {bio} name = "bioChange" onChange ={(e) => {setBio(e.target.value);}}/>
+                      <input type = "text" placeholder='Bio' value={bio} name="bioChange" onChange ={(e) => {setBio(e.target.value);}}/>
                       <br></br>
                       <button onClick={editProfileInfo}>Submit!</button>
                     </div>
                 <div className='postForm'>
-                    <input type='text' placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                    <input type='text' onKeyDown={handleKeyDown} placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                     <br></br>
                     <br></br>
                     <button onClick={createPost}>Post</button>
@@ -276,10 +303,34 @@ export default function Profile() {
                             overflow: 'hidden',
                             width: '50%'}}>
                         <b>{post?.username}</b>
+                        <br/>
+
+
+                        {isEditing?.pid === post.pid ? (
+                          <input
+                            name="editPost"
+                            type="text"
+                            placeholder="Edit Post"
+                            onChange ={(e) => {setUpdatedBody(e.target.value);}
+                            
+                          }
+                          />
+                        ) : (
+                        post.body )}
+
+
+                        <br/>
+                        {post?.time_updated ? post.time_updated : post.time_created}
                         <br></br>
-                        {post?.body}
-                        <br></br>
-                        {post?.time_created}
+                        {isEditing?.pid === post.pid ? <div> 
+                          <button onClick={() => savePost(post.pid)}>Save</button>
+                          <button onClick={() => setIsEditing({})}>Cancel</button> 
+                        </div> : 
+                        <div>
+                          <button onClick={() => deletePost(post.pid)}>Delete</button>
+                          <button onClick={() => editPost(post)}>Edit</button>
+                        </div>
+                      }
                         </li>)
                     })}
                 </ul>
