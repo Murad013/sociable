@@ -36,41 +36,61 @@ export default function SignUp() {
 
         return (
           <div className = "signUpForm">
-            <h1>Sign Up To Sociable!</h1>
-            <input type = "text" placeholder='First Name' name = "firstname" onChange ={(e) => {
-              setFirstName(e.target.value);
-            }}/>
-            <input type = "text" placeholder='Last Name' name = "lastname" onChange ={(e) => {
-              setLastName(e.target.value);
-            }}/>
-            <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
-              setUsername(e.target.value);
-            }}/>
-            <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
-              setEmail(e.target.value);
-            }}/>
-            <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
-              setPassword(e.target.value);
-            }}/>
-
-            <label for="gender">Gender:</label>
-            <select name="gender" id="gender" onChange ={(e) => {
-              setGender(e.target.value);
-            }}>
-              <optgroup label="Gender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </optgroup>
-            </select>
-
-            
-            <input type = "text" placeholder='Age' name = "age" onChange ={(e) => {
-              setAge(e.target.value);
-            }}/>
-            <button onClick={signup}>Sign Up</button>
-            <Link to={"/login"}>Log In!</Link>
-
-        </div>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>              
+              <div class= "split left">
+                <div class = "signUp">
+                  <h2>New here?</h2>
+                  <h1>Sign Up To Sociable!</h1>
+                  <div class = "input">
+                  <input type = "text" placeholder='First Name' name = "firstname" onChange ={(e) => {
+                    setFirstName(e.target.value);
+                  }}/>
+                  </div>
+                  <div class = "input">
+                  <input type = "text" placeholder='Last Name' name = "lastname" onChange ={(e) => {
+                    setLastName(e.target.value);
+                  }}/>
+                  </div>
+                  <div class = "input">
+                  <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
+                    setUsername(e.target.value);
+                  }}/>
+                  </div>
+                  <div class = "input">
+                  <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
+                    setEmail(e.target.value);
+                  }}/>
+                  </div>
+                  <div class = "input">
+                  <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
+                    setPassword(e.target.value);
+                  }}/>
+                  </div>
+                  <div class = "input">
+                  <select name="gender" id="gender" onChange ={(e) => {
+                      setGender(e.target.value);
+                      }}>
+                        <option disabled="disabled" selected="selected">Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>                  
+                  </select>
+                  </div>
+                  <div class = "input">
+                  <input type = "text" placeholder='Age' name = "age" onChange ={(e) => {
+                    setAge(e.target.value);
+                  }}/>
+                  </div>
+                  <button onClick={signup}>SIGN UP</button>
+                  </div>
+                </div>
+                <div class = "split right">
+                  <div class = "LogInReroute">
+                    <h1>Already have an account?</h1>
+                    <h2>Log in and stay connected.</h2>
+                    <Link to={"/login"}>LOG IN</Link>
+                  </div>
+                </div>
+            </div>
      )
 }

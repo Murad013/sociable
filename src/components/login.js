@@ -28,16 +28,32 @@ export default function Login() {
         };
 
         return (
-          <div className = "loginForm">
-            <h1>Login to Sociable!</h1>
-            <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
-              setEmail(e.target.value);
-            }}/>
-            <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
-              setPassword(e.target.value);
-            }}/>
-            <button onClick={loginFunction}>Log In!</button>
-            <Link to={"/"}>Create Account</Link>
+        <div className = "loginForm">
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>   
+          <div class= "split right">
+            <div class = "logIn">
+              <h2>Welcome back!</h2>
+              <h1>Log In to Sociable.</h1>
+              <div class = "input">
+                <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
+                  setEmail(e.target.value);
+                }}/>
+              </div>
+              <div class = "input">
+                <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
+                  setPassword(e.target.value);
+                }}/>
+              </div>
+              <button onClick={loginFunction}>LOG IN</button>
+            </div>
+          </div>
+            <div class = "split left">
+              <div class = "signUpReroute">
+                <h2>Don't have an account?</h2>
+                <h1>Sign up to stay connected!</h1>
+                <Link to={"/"}>SIGN UP</Link>
+              </div>
+            </div>
         </div>
      )
 }
