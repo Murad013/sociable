@@ -239,13 +239,13 @@ export default function Profile() {
             <h1>Profile</h1>
                 <div className='editingProfileInfo'>
                       <input type = "text" placeholder='Bio' value={bio} name="bioChange" onChange ={(e) => {setBio(e.target.value);}}/>
-                      <br></br>
+                      <br/>
                       <button onClick={editProfileInfo}>Submit!</button>
                     </div>
+                    <br/>
                 <div className='postForm'>
-                    <input type='text' onKeyDown={handleKeyDown} placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
-                    <br></br>
-                    <br></br>
+                    <textarea onKeyDown={handleKeyDown} placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                    <br/>
                     <button onClick={createPost}>Post</button>
                 </div>
                 {/*profile information*/}
@@ -307,20 +307,16 @@ export default function Profile() {
                         <b>{post?.username}</b>
                         <br/>
 
-
                         {isEditing?.pid === post.pid ? (
-                          <input
+                          <textarea
                             name="editPost"
                             onKeyDown={handleKeyDown}
-                            type="text"
+                            type="textarea"
                             placeholder="Edit Post"
                             onChange ={(e) => {setUpdatedBody(e.target.value);}}
                           />
-                          
-
                         ) : (
                         post.body )}
-
 
                         <br/>
                         {
@@ -330,13 +326,13 @@ export default function Profile() {
                         post.time_created}
                         <br></br>
                         {isEditing?.pid === post.pid ? <div> 
-                          <button onClick={() => savePost(post.pid)}>Save</button>
-                          <button onClick={() => setIsEditing({})}>Cancel</button> 
+                          <button onClick={() => savePost(post.pid)} style={{fontSize:'18px', color: 'green'}} ><i class="fa fa-save"></i></button>
+                          <button onClick={() => setIsEditing({})} style={{fontSize:'18px', color: 'red'}} ><i class="fa fa-close"></i></button> 
                         </div> 
                         : 
                         <div>
-                          <button onClick={() => deletePost(post.pid)}>Delete</button>
-                          <button onClick={() => editPost(post)}>Edit</button>
+                          <button onClick={() => deletePost(post.pid)} style={{fontSize:'18px', color: 'red'}} ><i class="fa fa-trash"></i></button>
+                          <button onClick={() => editPost(post)} style={{fontSize:'18px', color: 'green'}} ><i class="fa fa-edit"></i></button>
                         </div>
                       }
                         </li>)
