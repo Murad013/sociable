@@ -53,8 +53,17 @@ li {
   background-color: #cbd4d8;
 }
 
+.signUpInput select{
+  border: none;
+  padding: 5 100 5 100;
+  border-radius: 10px;
+  background-color: #cbd4d8;
+  color: #1d3c4b94;
+}
+
 ::placeholder{
   color: #1d3c4b94;
+  text-align: center;
 }
 
 .signUpForm h1{

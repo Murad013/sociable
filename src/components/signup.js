@@ -66,15 +66,13 @@ export default function SignUp() {
                   }}/>
                   </div>
                   <div class = "signUpInput">
-                  <label for="gender">Gender:</label>
                   <select name="gender" id="gender" onChange ={(e) => {
                       setGender(e.target.value);
                       }}>
-                      <optgroup label="Gender">
+                        <option disabled="disabled" selected="selected">Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
-                        <option value="Other">Other</option>
-                      </optgroup>
+                        <option value="Other">Other</option>                  
                   </select>
                   </div>
                   <div class = "signUpInput">
