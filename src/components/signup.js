@@ -36,36 +36,37 @@ export default function SignUp() {
 
         return (
           <div className = "signUpForm">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>              <div class= "split left">
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>              
+              <div class= "split left">
                 <div class = "signUp">
                   <h2>New here?</h2>
                   <h1>Sign Up To Sociable!</h1>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <input type = "text" placeholder='First Name' name = "firstname" onChange ={(e) => {
                     setFirstName(e.target.value);
                   }}/>
                   </div>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <input type = "text" placeholder='Last Name' name = "lastname" onChange ={(e) => {
                     setLastName(e.target.value);
                   }}/>
                   </div>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
                     setUsername(e.target.value);
                   }}/>
                   </div>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
                     setEmail(e.target.value);
                   }}/>
                   </div>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
                     setPassword(e.target.value);
                   }}/>
                   </div>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <select name="gender" id="gender" onChange ={(e) => {
                       setGender(e.target.value);
                       }}>
@@ -75,7 +76,7 @@ export default function SignUp() {
                         <option value="Other">Other</option>                  
                   </select>
                   </div>
-                  <div class = "signUpInput">
+                  <div class = "input">
                   <input type = "text" placeholder='Age' name = "age" onChange ={(e) => {
                     setAge(e.target.value);
                   }}/>

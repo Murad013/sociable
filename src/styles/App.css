@@ -18,6 +18,12 @@ li {
   display: inline-block;
 }
 
+/* SIGN UP */
+
+.signUpForm{
+  font-family: "Oxygen";
+}
+
 .split {
   height: 100%;
   width: 50%;
@@ -28,13 +34,13 @@ li {
   margin: auto;
 }
 
-.left {
+.signUpForm .left {
   left: 0;
   background-color: #1d3c4b;
 }
 
 /* Control the right side */
-.right {
+.signUpForm .right {
   right: 0;
   background-image:linear-gradient(47deg, rgba(224,211,167,0.8300362381280637) 0%, rgba(197,142,36,0.7964227927499125) 100%), 
   url("C:\Users\annar\Desktop\SociableProject\sociable\images\background.gif");
@@ -42,18 +48,19 @@ li {
   background-size: cover;
 }
 
-.signUpInput{
+.input{
   padding: 5 0 5 0;
 }
 
-.signUpInput input[type=text], input[type=password]{
+/*for both sign up AND log in pages*/
+.input input[type=text], input[type=password]{
   border: none;
   padding: 5 50 5 50;
   border-radius: 10px;
   background-color: #cbd4d8;
 }
 
-.signUpInput select{
+.input select{
   border: none;
   padding: 5 100 5 100;
   border-radius: 10px;
@@ -70,16 +77,16 @@ li {
   padding-bottom: 10;
 }
 
-.signUp{
+.signUp, .logIn, .LogInReroute, .signUpReroute{
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  font-family: "Oxygen";
 }
 
-.signUp button{
+/*for both sign up and log in*/
+.signUp button, .loginForm button{
   padding: 10 20 10 20;
   margin-top: 15;
   border: none;
@@ -90,25 +97,16 @@ li {
   letter-spacing: 2px;
   box-shadow:0 0 25px #17303c;
 }
-
-.signUp button:hover{
+/*for both sign up and log in*/
+.signUp button:hover, .loginForm button:hover{
   background-color: #ffb83eda;
-}
-
-.LogInReroute{
-  font-family: "Oxygen";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
 }
 
 .LogInReroute h2{
   margin-bottom: 35px;
 }
 
-.LogInReroute a{
+.LogInReroute a, .signUpReroute a{
   padding: 10 50 10 50;
   background-color: white;
   border-radius: 10px;
@@ -119,9 +117,44 @@ li {
   box-shadow:0 0 25px #a77b2fda;
 }
 
-.LogInReroute a:hover{
+.LogInReroute a:hover, .signUpReroute a:hover{
   background-color: #1d3c4b;
   color: white;
 }
+
+/* LOG IN */
+
+.loginForm .left {
+  left: 0;
+  background-image:linear-gradient(47deg, rgba(224,211,167,0.8300362381280637) 0%, rgba(197,142,36,0.7964227927499125) 100%), 
+  url("C:\Users\annar\Desktop\SociableProject\sociable\images\background.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Control the right side */
+.loginForm .right {
+  right: 0;
+  background-color: #1d3c4b;
+}
+
+.loginForm{
+  font-family: "Oxygen";
+}
+
+.loginForm h1{
+  padding-bottom: 15;
+}
+
+.logIn input[type=password]{
+  margin-bottom: 15;
+}
+
+.signUpReroute h1{
+  margin-bottom: 20;
+}
+
+
+
 
 
