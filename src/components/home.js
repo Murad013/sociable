@@ -9,9 +9,9 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
 
   const createPost = () => {
-      Axios.post('http://localhost:3001/api/posts/post', {
-      body: body
-      },
+    if (body){
+      Axios.post('http://localhost:3001/api/posts/post', 
+      {body},
       {withCredentials: true}
       ).then(() => {
         swal('Success', "Post Successful", "success");
@@ -20,29 +20,11 @@ export default function Home() {
       }).catch(() => {
         swal("Error", "Could Not Post", "error");
       });
-  }
-  // To edit post content
-  const editPost = () => {
-      Axios.patch('http://localhost:3001/api/posts/post/:pid', 
-      {body: body},
-      {withCredentials: true}
-      ).then(() => {
-        getPosts();
-      }).catch(() => {
-        swal("Error", "Could Not Edit", "error");
-      });
-  }
-  // To delete post
-  const deletePost = () => {
-      Axios.delete('http://localhost:3001/api/posts/post/:pid', 
-      {body: body},
-      {withCredentials: true}
-      ).then(() => {
-        getPosts();
-      }).catch(() => {
-        swal("Error", "Could Not Edit", "error");
-      });
-  }
+    }
+    else{
+      return swal("Error", "Please Enter Something", "error");
+    }
+}
   // To get all posts regardless of user ID
   const getPosts = () => {
       Axios.get("http://localhost:3001/api/posts", {
@@ -63,11 +45,17 @@ export default function Home() {
       getPosts();
   }, []);
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      createPost();    
+    }
+  }
+
      return (
                <div className='Home' style={{textAlign: 'center'}}>
                     <h1>Home</h1>
                     <div className='postForm'>
-                        <input type='text' placeholder='Something on your mind ?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                        <input type='text' onKeyDown={handleKeyDown} placeholder='Something on your mind ?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
                         <br></br>
                         <br></br>
                         <button onClick={createPost}>Post</button>

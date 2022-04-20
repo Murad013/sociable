@@ -1,4 +1,4 @@
-const {createPost, getPosts, getPostsByUserID, updatePost, deletePost} = require('../services/post-services');
+const {createPost, getPosts, getPostsByUserID, updatePost, deletePost, getPostsByID} = require('../services/post-services');
 const jwtDecode = require('jwt-decode');
 module.exports = {
   createPost: (req, res) => {
@@ -63,10 +63,32 @@ module.exports = {
       });
     });
   },
+  getPostsByID: (req, res) => {
+    const id = req.params;
+    getPostsByID(id, (err, results) => {
+      //If there is an error, console.log that error and return nothing
+      if(err) {
+        console.log(err);
+        return;
+      }
+      //If no records were found
+      if(!results) {
+        return res.status(500).json({
+          success: 0,
+          message: 'No post was found with that ID'
+        });
+      }
+      //If success, return user information
+      return res.status(200).json({
+        success: 1,
+        data: results
+      });
+    });
+  },
   updatePost: (req,res) => {
-    const token = req.cookies.authorization;
-    const decoded = jwtDecode(token);
-    updatePost(decoded.result, req.body, (err,results) => {
+    const id = req.params;
+    const body = req.body.body;
+    updatePost({id,body}, (err,results) => {
       if(err){
         console.log(err);
       }
@@ -91,7 +113,7 @@ module.exports = {
           return;
         }
         //If no records were found
-        if(results.affectedRows === 0) {
+        if(!results) {
           return res.status(500).json({
             success: 0,
             message: 'No post was found with that ID'
