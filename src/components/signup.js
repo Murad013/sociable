@@ -30,43 +30,48 @@ export default function SignUp() {
                 swal(`Success!`,"Please Log In!", "success");
                 navigate('/login', { replace: true });
           }).catch(() => {
-            swal(`Sorry ${firstname}`, `${email} is already taken...`, "error");
+            swal(`Error`, `Email ${email} or Username ${username} is already taken...`, "error");
           });
         };
 
         return (
           <div className = "signUpForm">
             <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>              
-              <div class= "split left">
-                <div class = "signUp">
+              <div className = "split left">
+                <div className = "signUp">
                   <h2>New here?</h2>
                   <h1>Sign Up To Sociable!</h1>
-                  <div class = "input">
+                  <div className = "input">
                   <input type = "text" placeholder='First Name' name = "firstname" onChange ={(e) => {
                     setFirstName(e.target.value);
                   }}/>
                   </div>
-                  <div class = "input">
+                  <div className = "input">
                   <input type = "text" placeholder='Last Name' name = "lastname" onChange ={(e) => {
                     setLastName(e.target.value);
                   }}/>
                   </div>
-                  <div class = "input">
+                  <div className = "input">
                   <input type = "text" placeholder='Username' name = "username" onChange ={(e) => {
                     setUsername(e.target.value);
                   }}/>
                   </div>
-                  <div class = "input">
+                  <div className = "input">
                   <input type = "text" placeholder='Email' name = "email" onChange ={(e) => {
                     setEmail(e.target.value);
                   }}/>
                   </div>
-                  <div class = "input">
+                  <div className = "input">
                   <input type = "password" placeholder='Password' name = "password" onChange ={(e) => {
                     setPassword(e.target.value);
                   }}/>
                   </div>
-                  <div class = "input">
+                  <div className = "input">
+                  <input type = "text" placeholder='Age' name = "age" onChange ={(e) => {
+                    setAge(e.target.value);
+                  }}/>
+                  </div>
+                  <div className = "input">
                   <select name="gender" id="gender" onChange ={(e) => {
                       setGender(e.target.value);
                       }}>
@@ -76,16 +81,12 @@ export default function SignUp() {
                         <option value="Other">Other</option>                  
                   </select>
                   </div>
-                  <div class = "input">
-                  <input type = "text" placeholder='Age' name = "age" onChange ={(e) => {
-                    setAge(e.target.value);
-                  }}/>
-                  </div>
+                  <br/>
                   <button onClick={signup}>SIGN UP</button>
                   </div>
                 </div>
-                <div class = "split right">
-                  <div class = "LogInReroute">
+                <div className = "split right">
+                  <div className = "LogInReroute">
                     <h1>Already have an account?</h1>
                     <h2>Log in and stay connected.</h2>
                     <Link to={"/login"}>LOG IN</Link>

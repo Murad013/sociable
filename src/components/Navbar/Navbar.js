@@ -1,19 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import {Nav, NavLink, Bars, NavMenu, NavBtn, LoginNavBtnLink, LogoutNavBtnLink} from './navbarElements'
-import Cookies from 'universal-cookie';
+import {Nav, NavLink, Bars, NavMenu, NavBtn, LogoutNavBtnLink} from './NavbarElements'
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
 
-     const [cookie, setCookie] = useState();
      const navigate = useNavigate();
 
      // Logout clears all cookies from frontend and from backend
      function logout () {
           clearCookie();
-          const cookies = new Cookies();
-          cookies.remove('token');
      } 
 
      //Used to clear 'authorization' cookie generated from server
@@ -25,16 +20,8 @@ export default function Navbar() {
                navigate('/login', { replace: true })
           });
       }
-
-     
-     useEffect(() => {
-          const cookies = new Cookies();
-          setCookie(cookies.get('token'));
-     },[cookie]);
-
      return (
           <>
-          {cookie ? 
                     <Nav>
                          <NavLink to = '/home'>
                               <h1>Sociable</h1>
@@ -57,29 +44,7 @@ export default function Navbar() {
                          <NavBtn onClick={logout}>
                               <LogoutNavBtnLink to='/login'>Logout</LogoutNavBtnLink>
                          </NavBtn>
-                    </Nav>
-                    : // Above Navbar displays if cookie exists (logged in) Below NavBar displays if cookie doesn't exist (logged out)
-                    <Nav>
-                         <NavLink to = '/'>
-                              <h1>Sociable</h1>
-                         </NavLink>
-                         <Bars />
-                         <NavMenu>
-                              <NavLink to = "/">
-                                   SignUp
-                              </NavLink>
-                              <NavLink to = "/about">
-                                   About
-                              </NavLink>
-                              <NavLink to = "/contact">
-                                   Contact
-                              </NavLink>
-                         </NavMenu>
-                         <NavBtn>
-                         <LoginNavBtnLink to='/login'>Login</LoginNavBtnLink>
-                         </NavBtn>
-                    </Nav>
-          }
+                    </Nav>    
           </>
      );
 }
