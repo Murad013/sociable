@@ -96,7 +96,7 @@ export const LoginNavBtnLink = styled(Link)`
 `
   export const LogoutNavBtnLink = styled(Link)`
   border-radius: 4px;
-  background: #C04000;
+  background: #1d3c4b9;
   padding: 10px 22px;
   color: #fff;
   outline: none;

@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import React, {useState, useEffect} from 'react';
 import swal from 'sweetalert';
-import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 
 export default function Profile() {
@@ -90,8 +89,6 @@ export default function Profile() {
         ).then(() => {
           swal(`Sorry to see you go...`,"Account Deleted", "success");
           clearCookie();
-          const cookies = new Cookies();
-          cookies.remove('token');
           navigate('/', { replace: true });
 
         }).catch(() => {
