@@ -20,8 +20,24 @@ export default function Navbar() {
                navigate('/login', { replace: true })
           });
       }
+
+
+     
+     useEffect(() => {
+          const cookies = new Cookies();
+          setCookie(cookies.get('token'));
+     },[cookie]);
+
+     
+
      return (
           <>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>
+          {cookie ? 
+
+     return (
+          <>
+
                     <Nav>
                          <NavLink to = '/home'>
                               <h1>Sociable</h1>
@@ -42,9 +58,10 @@ export default function Navbar() {
                               </NavLink>
                          </NavMenu>
                          <NavBtn onClick={logout}>
-                              <LogoutNavBtnLink to='/login'>Logout</LogoutNavBtnLink>
+                              <LogoutNavBtnLink to='/login'>LOG OUT</LogoutNavBtnLink>
                          </NavBtn>
-                    </Nav>    
-          </>
+                    </Nav>
+                    
+          </>       
      );
 }

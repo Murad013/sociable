@@ -53,31 +53,34 @@ export default function Home() {
 
      return (
                <div className='Home' style={{textAlign: 'center'}}>
-                    <h1>Home</h1>
+                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+                    <h1>Something on your mind?</h1>
                     <div className='postForm'>
-                        <input type='text' onKeyDown={handleKeyDown} placeholder='Something on your mind ?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
-                        <br></br>
-                        <br></br>
-                        <button onClick={createPost}>Post</button>
-                    </div>
+                        <input type='text' onKeyDown={handleKeyDown} placeholder='Share it with the world!' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                        </div>
+                        <button onClick={createPost}>POST</button>
                     <ul>
                             {posts.map((post, i) => {
                               return <li key = {i} style={{
-                                display: 'inline-block',
-                                background: '#256ce1',
+                                display: 'block',
+                                background: 'rgb(113,152,155)',
+                                background: 'linear-gradient(47deg, rgba(113,152,155,1) 0%, rgba(68,102,111,1) 27%, rgba(28,57,72,1) 100%)',                                
                                 color: 'white',
-                                border: '1px solid #ccc',
-                                borderRadius: 6,
-                                padding: '15 15 15 15',
-                                margin: '10px 10px 0 0',
+                                border: '1px solid #71989b',
+                                borderRadius: '10px',
+                                padding: '15 15 20 15',
+                                margin: '0 auto 15 auto',
                                 overflow: 'hidden',
-                                width: '50%'
+                                width: '45%',
+                                boxShadow: '0 0 3px #17303c5d'
                               }}>
+                                <div class= "user">
                                 <b>{post?.username}</b>
+                                </div>
+                                {post?.time_created}
                                 <br></br>
                                 {post?.body}<br></br>
-                                {post?.time_created}
-                                </li>
+                                </li>  
                             }
                             )}
                     </ul>

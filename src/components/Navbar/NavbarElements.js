@@ -3,12 +3,14 @@ import { NavLink as Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Nav = styled.nav`
-  background: #000;
+  background: #1d3c4b;
   height: 80px;
   display: flex;
   justify-content: space-between;
   padding: 0.5rem calc((100vw - 1000px) / 2);
   z-index: 10;
+  font-family: "Oxygen";
+  box-shadow: 0 0 10px #17303c;
 
   /* Third Nav */
   /* justify-content: flex-start; */
@@ -24,7 +26,9 @@ export const NavLink = styled(Link)`
   cursor: pointer;
 
   &.active {
-    color: #15cdfc;
+    color: #80b1ab;
+    font-weight: bolder;
+    font-size: 18;
   }
 `;
 
@@ -91,12 +95,12 @@ export const LoginNavBtnLink = styled(Link)`
   &:hover {
     transition: all 0.2s ease-in-out;
     background: #fff;
-    color: #010606;
+    color: #e7980fda;
   }
 `
   export const LogoutNavBtnLink = styled(Link)`
   border-radius: 4px;
-  background: #1d3c4b9;
+  background: #e7980fda;
   padding: 10px 22px;
   color: #fff;
   outline: none;
@@ -104,13 +108,16 @@ export const LoginNavBtnLink = styled(Link)`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
+  font-weight: bold;
+  box-shadow:0 0 25px #17303c;
 
   /* Second Nav */
   margin-left: 24px;
 
   &:hover {
     transition: all 0.2s ease-in-out;
-    background: #fff;
-    color: #010606;
+    background-color: #ffb83eda;
+    color: white;
+    font-weight: bolder;
   }
 `;
