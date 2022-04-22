@@ -43,7 +43,7 @@ li {
 .signUpForm .right {
   right: 0;
   background-image:linear-gradient(47deg, rgba(224,211,167,0.8300362381280637) 0%, rgba(197,142,36,0.7964227927499125) 100%), 
-  url('/Users/murad/dev/project/sociable/images/background.gif');
+  url("/Users/murad/dev/project/sociable/images/background.gif");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -55,16 +55,15 @@ li {
 /*for both sign up AND log in pages*/
 .input input[type=text], input[type=password]{
   border: none;
-  padding: 20 50 20 50;
-  border-radius: 3em;
+  padding: 5 50 5 50;
+  border-radius: 10px;
   background-color: #cbd4d8;
-  margin-bottom: 3px;
 }
 
 .input select{
   border: none;
   padding: 5 100 5 100;
-  border-radius: 3em;
+  border-radius: 10px;
   background-color: #cbd4d8;
   color: #1d3c4b94;
 }
@@ -92,13 +91,12 @@ li {
   margin-top: 15;
   border: none;
   background-color: #e7980fda;
-  border-radius: 3em;
+  border-radius: 10px;
   font-weight: bold;
   color: white;
   letter-spacing: 2px;
   box-shadow:0 0 25px #17303c;
 }
-
 /*for both sign up and log in*/
 .signUp button:hover, .loginForm button:hover{
   background-color: #ffb83eda;
@@ -109,9 +107,9 @@ li {
 }
 
 .LogInReroute a, .signUpReroute a{
-  padding: 5px 4px 5px 4px;
+  padding: 10 50 10 50;
   background-color: white;
-  border-radius: 3em;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: bolder;
   color: #214557;
@@ -129,7 +127,7 @@ li {
 .loginForm .left {
   left: 0;
   background-image:linear-gradient(47deg, rgba(224,211,167,0.8300362381280637) 0%, rgba(197,142,36,0.7964227927499125) 100%), 
-  url('/Users/murad/dev/project/sociable/images/background.gif');
+  url("/Users/murad/dev/project/sociable/images/background.gif");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -203,4 +201,13 @@ Nav a:hover{
 .user{
   display: inline;
   padding-right: 200;
+  font-size: 12;
+  color: rgba(255, 255, 255, 0.878);
+}
+
+.time{
+  display: inline;
+  font-size: 12;
+  color: rgba(255, 255, 255, 0.878);
+  font-style: italic;
 }

@@ -1,14 +1,19 @@
-import {Nav, NavLink, Bars, NavMenu, NavBtn, LogoutNavBtnLink} from './NavbarElements'
+import React, { useEffect, useState } from 'react';
+import {Nav, NavLink, Bars, NavMenu, NavBtn, LoginNavBtnLink, LogoutNavBtnLink} from './NavbarElements'
+import Cookies from 'universal-cookie';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 export default function Navbar() {
 
+     const [cookie, setCookie] = useState();
      const navigate = useNavigate();
 
      // Logout clears all cookies from frontend and from backend
      function logout () {
           clearCookie();
+          const cookies = new Cookies();
+          cookies.remove('token');
      } 
 
      //Used to clear 'authorization' cookie generated from server
@@ -21,7 +26,6 @@ export default function Navbar() {
           });
       }
 
-
      
      useEffect(() => {
           const cookies = new Cookies();
@@ -33,11 +37,6 @@ export default function Navbar() {
      return (
           <>
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>
-          {cookie ? 
-
-     return (
-          <>
-
                     <Nav>
                          <NavLink to = '/home'>
                               <h1>Sociable</h1>
@@ -61,7 +60,6 @@ export default function Navbar() {
                               <LogoutNavBtnLink to='/login'>LOG OUT</LogoutNavBtnLink>
                          </NavBtn>
                     </Nav>
-                    
           </>       
      );
 }
