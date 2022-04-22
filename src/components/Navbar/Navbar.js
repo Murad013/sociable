@@ -32,8 +32,11 @@ export default function Navbar() {
           setCookie(cookies.get('token'));
      },[cookie]);
 
+     
+
      return (
           <>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>
           {cookie ? 
                     <Nav>
                          <NavLink to = '/home'>
@@ -55,7 +58,7 @@ export default function Navbar() {
                               </NavLink>
                          </NavMenu>
                          <NavBtn onClick={logout}>
-                              <LogoutNavBtnLink to='/login'>Logout</LogoutNavBtnLink>
+                              <LogoutNavBtnLink to='/login'>LOG OUT</LogoutNavBtnLink>
                          </NavBtn>
                     </Nav>
                     : // Above Navbar displays if cookie exists (logged in) Below NavBar displays if cookie doesn't exist (logged out)
@@ -80,6 +83,6 @@ export default function Navbar() {
                          </NavBtn>
                     </Nav>
           }
-          </>
+          </>       
      );
 }
