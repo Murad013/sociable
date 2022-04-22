@@ -63,7 +63,6 @@ export default function Home() {
                             {posts.map((post, i) => {
                               return <li key = {i} style={{
                                 display: 'block',
-                                background: 'rgb(113,152,155)',
                                 background: 'linear-gradient(47deg, rgba(113,152,155,1) 0%, rgba(68,102,111,1) 27%, rgba(28,57,72,1) 100%)',                                
                                 color: 'white',
                                 border: '1px solid #71989b',
@@ -77,7 +76,9 @@ export default function Home() {
                                 <div class= "user">
                                 <b>{post?.username}</b>
                                 </div>
+                                <div class= "time">
                                 {post?.time_created}
+                                </div>
                                 <br></br>
                                 {post?.body}<br></br>
                                 </li>  
