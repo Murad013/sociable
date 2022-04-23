@@ -60,6 +60,7 @@ export default function Home() {
                         </div>
                         <button onClick={createPost}>POST</button>
                     <ul>
+                        
                             {posts.map((post, i) => {
                               return <li key = {i} style={{
                                 display: 'block',
@@ -67,23 +68,27 @@ export default function Home() {
                                 color: 'white',
                                 border: '1px solid #71989b',
                                 borderRadius: '10px',
-                                padding: '15 15 20 15',
+                                padding: '15 .5em 15 .5em',
                                 margin: '0 auto 15 auto',
                                 overflow: 'hidden',
-                                width: '45%',
+                                width: '40em',
                                 boxShadow: '0 0 3px #17303c5d'
                               }}>
-                                <div class= "user">
-                                <b>{post?.username}</b>
+                                <div class = "postBox">
+                                  <div class= "user">
+                                    <b>{post?.username}</b>
+                                  </div>                          
+                                    <p>{post?.time_created}</p>
+                                  <br></br>
+                                  <div class = "postBody">
+                                    {post?.body}<br></br>
+                                  </div>
                                 </div>
-                                <div class= "time">
-                                {post?.time_created}
-                                </div>
-                                <br></br>
-                                {post?.body}<br></br>
-                                </li>  
+                                </li> 
+                                
                             }
                             )}
+                            
                     </ul>
           </div>
      )

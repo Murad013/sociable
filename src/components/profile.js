@@ -21,7 +21,6 @@ export default function Profile() {
     const [age, setAge] = useState('');
     const [pfp, setPfp] = useState([]);
     const [isEditing, setIsEditing] = useState();
-    const [isEdited, setIsEdited] = useState(false);
 
     const addProfileInfo = () => {
         Axios.post('http://localhost:3001/api/users/profile', 
@@ -170,7 +169,6 @@ export default function Profile() {
         ).then(()=> {
           swal('Success', "Updated Successfully", "success");
           setIsEditing({});
-          setIsEdited(true);
           getPostsByUserId();
         }).catch(() => {
         swal("Error", "Could Not Edit", "error");
