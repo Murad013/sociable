@@ -9,7 +9,6 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
 
   const createPost = () => {
-    console.log(body);
     if (body){
       Axios.post('http://localhost:3001/api/posts/post', 
       {body},
