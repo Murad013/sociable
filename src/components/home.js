@@ -9,6 +9,7 @@ export default function Home() {
   const [posts, setPosts] = useState([]);
 
   const createPost = () => {
+    console.log(body);
     if (body){
       Axios.post('http://localhost:3001/api/posts/post', 
       {body},
@@ -74,14 +75,14 @@ export default function Home() {
                                 width: '40em',
                                 boxShadow: '0 0 3px #17303c5d'
                               }}>
-                                <div class = "postBox">
-                                  <div class= "user">
+                                <div className = "postBox">
+                                  <div className= "user">
                                     <b>{post?.username}</b>
                                   </div>                          
                                     <p>{post?.time_created}</p>
                                   <br></br>
-                                  <div class = "postBody">
-                                    {post?.body}<br></br>
+                                  <div className = "postBody">
+                                    <b>{post?.body}</b><br></br>
                                   </div>
                                 </div>
                                 </li> 

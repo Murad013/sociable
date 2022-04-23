@@ -67,10 +67,10 @@ export default function SignUp() {
                   }}/>
                   </div>
                   <div className = "input">
-                  <select name="gender" id="gender" onChange ={(e) => {
+                  <select defaultValue={'DEFAULT'} name="gender" id="gender" onChange ={(e) => {
                       setGender(e.target.value);
                       }}>
-                        <option disabled="disabled" selected="selected">Gender</option>
+                        <option value="DEFAULT" disabled>Gender</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>                  
