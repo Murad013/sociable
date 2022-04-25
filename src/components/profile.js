@@ -160,7 +160,6 @@ export default function Profile() {
   // To set isEditing state to true
     const editPost = (post) => {
       setIsEditing(post);
-      setUpdatedBody(updatedBody);
     }
     // To save edited changes of post
     const savePost = (pid) => {
@@ -299,14 +298,13 @@ export default function Profile() {
                         <br></br>
                        <div className="editPost">
                           {isEditing?.pid === post.pid ? (
-                          <textarea
-                            name="editPost"
-                            onKeyDown={handleKeyDown}
-                            value ={post.body}
+                            
+                          <input
                             type="text"
-                            placeholder="Edit Post"
+                            defaultValue={post.body}
+                            onKeyDown={handleKeyDown}
                             onChange ={(e) => {setUpdatedBody(e.target.value);}}
-                          />
+                            />
                         ) : (
                         post.body )}
                         </div>

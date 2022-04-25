@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Contact = () => {
+export default function Contact() {
   return (
     <div className='contact'>
       <h1>Want to contact the creators of Sociable?</h1>
@@ -22,5 +22,3 @@ const Contact = () => {
     </div>
   );
 };
-
-export default Contact;
