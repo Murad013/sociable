@@ -167,7 +167,7 @@ Nav a:hover{
   font-family: "Oxygen";
 }
 
-.Home h1{
+.Home h1, .about h1, .contact h1{
   padding: 20 10 10 10;
   color: #1d3c4b;
 }
@@ -182,7 +182,7 @@ Nav a:hover{
   border-radius: 10px;
 }
 
-.Home button{
+.Home button, .ProfilePage button{
   padding: 5 20 5 20;
   margin: 10 0 40 0;
   border: none;
@@ -194,7 +194,7 @@ Nav a:hover{
   box-shadow: 0 0 3px #17303c5d
 }
 
-.Home button:hover{
+.Home button:hover, .ProfilePage button:hover{
   background-color: #ffb83eda;
 }
 
@@ -205,7 +205,7 @@ Nav a:hover{
   color: rgba(255, 255, 255, 0.878);
 }
 
-.postBox p{
+.postBox p, .ProfilePage p{
   display: inline;
   float: right;
   font-size: 12;
@@ -216,4 +216,132 @@ Nav a:hover{
 .postBody{
   width: 50%;
   margin: auto;
+  text-align: center;
+}
+
+.ProfilePage{
+  font-family: "Oxygen";
+}
+
+.userInfo{
+  background-image:linear-gradient(47deg, rgba(224,211,167,0.8300362381280637) 0%, rgba(197,142,36,0.7964227927499125) 100%), 
+  url("/Users/murad/dev/project/sociable/images/background.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 0 0 10px #17303c76;
+  padding-bottom: 10;
+}
+
+.ProfilePage h1{
+  color: white;
+  padding: 20 0;
+  text-shadow: 2px 2px 4px #b0730ada;
+}
+
+.subject {
+  float: left;
+}
+
+.info i{
+  float: left;
+  padding-left: 5em;
+}
+
+.allUserInfo{
+  display: flex;
+  justify-content: center;
+  font-size: 17;
+  text-shadow: 2px 2px 4px #b0730ada;
+}
+
+.ProfilePage input[type="text"]{
+  text-align: center;
+  width: 500;
+  padding: 11.5 0 11.5 0;
+  margin-top: 45;
+  border: 1px solid #71989b;
+  background-color: #e4eef3;
+  border-radius: 10px;
+}
+
+.edit button, .delete button, .save button, .cancel button{
+  padding: 5 20 5 20;
+  margin: 25 5 10 5;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 10;
+  color: white;
+  letter-spacing: 2px;
+  box-shadow: 0 0 3px #17303c5d
+}
+
+.edit, .delete, .save, .cancel{
+  display: inline;
+}
+
+.edit button, .save button{
+  background-color: #749b71;
+}
+
+.edit button:hover, .save button:hover{
+  background-color: #6bbe65;
+}
+
+.delete button:hover, .cancel button:hover{
+  background-color: #c06b6b;
+}
+
+.delete button, .cancel button{
+  background-color: #9b7171;
+}
+
+.editPost input[type="text"]{
+  width: 90%;
+  margin: auto;
+  text-align: center;
+  padding: 5 0 5 0;
+  border: 1px solid #71989b;
+  background-color: #e4eef3;
+  border-radius: 10px;
+}
+
+.editPost{
+  width: 50%;
+  margin: auto;
+  text-align: center;
+}
+
+.about, .contact{
+  color:#17303c;
+  font-family: "Oxygen";
+}
+
+.about p{
+  text-align: left;
+}
+
+.text{
+  padding: 40;
+  margin: 20 210 40 210;
+  background-color: white;
+  box-shadow: 0 0 5px #17303c5d;
+  border-radius: 10px;
+}
+
+.creator{
+  font-size: 18;
+  padding: 15;
+  margin: 20 400 20 400;
+  background-color: white;
+  box-shadow: 0 0 5px #17303c5d;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.creator p{
+  border: 2px dashed #1d3c4b;
+  border-radius: 10px;
+  padding: 15;
+  margin-bottom: 0;
 }

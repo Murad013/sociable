@@ -22,7 +22,7 @@ export default function Profile() {
     const [pfp, setPfp] = useState([]);
     const [isEditing, setIsEditing] = useState();
 
-    const addProfileInfo = () => {
+   /* const addProfileInfo = () => {
         Axios.post('http://localhost:3001/api/users/profile', 
         {bio: bio,
           pfp: pfp},
@@ -40,7 +40,7 @@ export default function Profile() {
         }).catch(() => {
             swal(`Sorry...`, "Invalid Request", "error");
         });
-    }
+    }*/
     // Edit User Information Form
     const editUserInfo = () => {
         Axios.patch('http://localhost:3001/api/users/',
@@ -98,7 +98,7 @@ export default function Profile() {
         });
     }
     // Edit profile bio and/or profile picture
-    const editProfileInfo = () => {
+    /*const editProfileInfo = () => {
         Axios.patch('http://localhost:3001/api/users/profile', 
         {bio: bio},
         { 
@@ -126,7 +126,7 @@ export default function Profile() {
         .then((json) => {
           setProfile(json.data.data);
         });
-    }
+    }*/
     //To get user's firstname or any other information to display on their profile
     const getUserByUserId = () => {
         Axios.get("http://localhost:3001/api/users/userID/:suid", 
@@ -160,6 +160,7 @@ export default function Profile() {
   // To set isEditing state to true
     const editPost = (post) => {
       setIsEditing(post);
+      setUpdatedBody(updatedBody);
     }
     // To save edited changes of post
     const savePost = (pid) => {
@@ -222,7 +223,7 @@ export default function Profile() {
     useEffect(() => {
         getPostsByUserId();
         getUserByUserId();
-        getProfileInfo();
+        //getProfileInfo();
     }, []);
 
 
@@ -234,107 +235,93 @@ export default function Profile() {
 
    return (
           <div className = "profilePage" style={{textAlign: 'center'}}>
-            <h1>Profile</h1>
-                <div className='editingProfileInfo'>
-                      <input type = "text" placeholder='Bio' value={bio} name="bioChange" onChange ={(e) => {setBio(e.target.value);}}/>
-                      <br></br>
-                      <button onClick={editProfileInfo}>Submit!</button>
-                    </div>
-                <div className='postForm'>
-                    <input type='text' onKeyDown={handleKeyDown} placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
-                    <br></br>
-                    <br></br>
-                    <button onClick={createPost}>Post</button>
-                </div>
-                {/*profile information*/}
-                <ul>
-                    {profile.map((profile, p) => {
-                        return (
-                          <li key = {p} style={{
-                          display: 'inline-block',
-                          background: '#256ce1',
-                          color: 'white',
-                          border: '1px solid #ccc',
-                          borderRadius: 6,
-                          padding: '15 15 15 15',
-                          margin: '10px 10px 0 0',
-                          overflow: 'hidden',
-                          width: '50%'}}>
-                          <b>Bio: {profile?.bio}</b>
-                          <br></br>
-                          </li>)
-                    })}
-                </ul>
-                {/*user information*/}
+            <div className= "userInfo">
+              <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>   
+            <h1>Welcome to your profile page!</h1>
+                  {/*user information*/}
                 <ul>
                     {users.map((user, u) => {
                         return (
                           <li key = {u} style={{
-                              display: 'inline-block',
-                              background: '#256ce1',
-                              color: 'white',
-                              border: '1px solid #ccc',
-                              borderRadius: 6,
-                              padding: '15 15 15 15',
-                              margin: '10px 10px 0 0',
-                              overflow: 'hidden',
-                              width: '50%'}}>
-                          <b>Name: {user?.firstname} {user?.lastname}</b>
-                          <br></br>
-                          <b>Age: {user?.age}</b>
-                          <br></br>
-                          <b>Gender: {user?.gender}</b>
-                          <br></br>
+                            display: 'block',
+                            color: 'white',
+                            margin: '0 auto 15 auto',
+                            overflow: 'hidden',
+                            width: '40em'}}>
+                           <div className=  "allUserInfo">
+                              <div className= "subject">
+                                <b>Name:</b>
+                                <br></br>
+                                <b>Age:</b> 
+                                <br></br>
+                                <b>Gender:</b> 
+                              </div>
+                              <div className=  "info">
+                                <i>{user?.firstname} {user?.lastname}</i>
+                                <br></br>
+                                <i>{user?.age}</i>
+                                <br></br>
+                                <i>{user?.gender}</i>
+                              </div>
+                          </div>   
                           </li>)
                     })}
                 </ul>
+                </div>
+                    <input type='text' onKeyDown={handleKeyDown} placeholder='Something on your mind?' value={body} name='postContent' onChange ={(e) => {setBody(e.target.value);}}/>
+                    <br></br>
+                    <button onClick={createPost}>POST</button>
                 {/*posts information*/}
                 <ul>
                     {posts.map((post, p) => {
                       return (
+
                         <li key = {p} style={{
-                            display: 'inline-block',
-                            background: '#256ce1',
-                            color: 'white',
-                            border: '1px solid #ccc',
-                            borderRadius: 6,
-                            padding: '15 15 15 15',
-                            margin: '10px 10px 0 0',
-                            overflow: 'hidden',
-                            width: '50%'}}>
+                          display: 'block',
+                          background: 'linear-gradient(47deg, rgba(113,152,155,1) 0%, rgba(68,102,111,1) 27%, rgba(28,57,72,1) 100%)',                                
+                          color: 'white',
+                          border: '1px solid #71989b',
+                          borderRadius: '10px',
+                          padding: '15 .5em 5 .5em',
+                          margin: '0 auto 15 auto',
+                          overflow: 'hidden',
+                          width: '40em',
+                          boxShadow: '0 0 3px #17303c5d'}}>
+                            <div className= "user">
                         <b>{post?.username}</b>
-                        <br/>
+                        </div>
 
-
-                        {isEditing?.pid === post.pid ? (
-                          <input
+                       <p> {
+                        post.time_updated ? 
+                        post.time_updated 
+                        : 
+                        post.time_created}</p>
+                        <br></br>
+                       <div className="editPost">
+                          {isEditing?.pid === post.pid ? (
+                          <textarea
                             name="editPost"
                             onKeyDown={handleKeyDown}
+                            value ={post.body}
                             type="text"
                             placeholder="Edit Post"
                             onChange ={(e) => {setUpdatedBody(e.target.value);}}
                           />
-                          
-
                         ) : (
                         post.body )}
-
-
-                        <br/>
-                        {
-                        post.time_updated ? 
-                        post.time_updated 
-                        : 
-                        post.time_created}
-                        <br></br>
+                        </div>
                         {isEditing?.pid === post.pid ? <div> 
-                          <button onClick={() => savePost(post.pid)}>Save</button>
-                          <button onClick={() => setIsEditing({})}>Cancel</button> 
+                          <div className="save"><button onClick={() => savePost(post.pid)}>SAVE</button></div>
+                          <div className="cancel"><button onClick={() => setIsEditing({})}>CANCEL</button></div>
                         </div> 
                         : 
                         <div>
-                          <button onClick={() => deletePost(post.pid)}>Delete</button>
-                          <button onClick={() => editPost(post)}>Edit</button>
+                          <div className='delete'>
+                             <button onClick={() => deletePost(post.pid)}>DELETE</button>
+                          </div>
+                          <div className='edit'>
+                             <button onClick={() => editPost(post)}>EDIT</button>
+                          </div>
                         </div>
                       }
                         </li>)
