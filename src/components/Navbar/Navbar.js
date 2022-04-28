@@ -11,8 +11,6 @@ export default function Navbar() {
      // Logout clears all cookies from frontend and from backend
      function logout () {
           clearCookie();
-          const cookies = new Cookies();
-          cookies.remove('token');
      } 
 
      //Used to clear 'authorization' cookie generated from server

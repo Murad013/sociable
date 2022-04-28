@@ -79,9 +79,9 @@ export default function Home() {
                                     <b>{post?.username}</b>
                                   </div>                          
                                     <p>{post?.time_created}</p>
-                                  <br></br>
+                                  <br/>
                                   <div className = "postBody">
-                                    <b>{post?.body}</b><br></br>
+                                    {post?.body}<br/>
                                   </div>
                                 </div>
                                 </li> 

@@ -233,6 +233,7 @@ export default function Profile() {
     }
 
    return (
+     
           <div className = "profilePage" style={{textAlign: 'center'}}>
             <div className= "userInfo">
               <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen"></link>   
@@ -299,12 +300,13 @@ export default function Profile() {
                        <div className="editPost">
                           {isEditing?.pid === post.pid ? (
                             
-                          <input
-                            type="text"
+                          <textarea
+                            name="text"
                             defaultValue={post.body}
                             onKeyDown={handleKeyDown}
                             onChange ={(e) => {setUpdatedBody(e.target.value);}}
                             />
+                            // <textarea name="text" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
                         ) : (
                         post.body )}
                         </div>
